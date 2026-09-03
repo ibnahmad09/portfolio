@@ -4,8 +4,92 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
 @theme {
-    --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: Georgia, ui-serif, 'Times New Roman', serif;
+
+    --color-cream-50: #faf7f2;
+    --color-cream-100: #f3ecdf;
+    --color-cream-200: #e8dcc9;
+
+    --color-ink-900: #241f1b;
+    --color-ink-700: #3d3530;
+    --color-ink-500: #7a7366;
+    --color-ink-300: #a39b8e;
+
+    --color-accent-600: #a05a2c;
+    --color-accent-700: #8a4d25;
+    --color-accent-800: #6b3c1d;
+
+    --color-warm-900: #1a1612;
+    --color-warm-800: #261f1a;
+    --color-warm-700: #352d26;
+
+    --radius-card: 1rem;
+    --radius-button: 9999px;
+
+    --shadow-card: 0 1px 3px color-mix(in srgb, #241f1b 7%, transparent),
+        0 4px 16px color-mix(in srgb, #241f1b 4%, transparent);
+    --shadow-card-hover: 0 4px 12px color-mix(in srgb, #241f1b 10%, transparent),
+        0 12px 32px color-mix(in srgb, #241f1b 6%, transparent);
+
+    --shadow-card-dark: 0 1px 3px rgba(0, 0, 0, 0.25),
+        0 4px 16px rgba(0, 0, 0, 0.15);
+    --shadow-card-hover-dark: 0 4px 12px rgba(0, 0, 0, 0.35),
+        0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Reveal animations ──────────────────────────────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered children */
+.stagger-children.is-visible > :nth-child(1) { transition-delay: 0ms; }
+.stagger-children.is-visible > :nth-child(2) { transition-delay: 100ms; }
+.stagger-children.is-visible > :nth-child(3) { transition-delay: 200ms; }
+.stagger-children.is-visible > :nth-child(4) { transition-delay: 300ms; }
+
+/* ── Grain texture ──────────────────────────────────────────────── */
+.grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 9000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 150px;
+}
+
+.dark .grain::before {
+    opacity: 0.06;
+}
+
+/* ── Dark mode overrides ────────────────────────────────────────── */
+.dark .shadow-card {
+    box-shadow: var(--shadow-card-dark);
+}
+.dark .shadow-card-hover {
+    box-shadow: var(--shadow-card-hover-dark);
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .stagger-children > * {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
 }
