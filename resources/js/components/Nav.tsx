@@ -99,87 +99,103 @@ export function Nav() {
     return (
         <nav
             ref={navRef}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-                scrolled
-                    ? 'bg-cream-50/95 shadow-[0_1px_2px_rgba(36,31,27,0.06)] backdrop-blur-md dark:bg-warm-900/95 dark:shadow-[0_1px_2px_rgba(0,0,0,0.3)]'
-                    : 'bg-transparent'
-            }`}
+            className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         >
-            <div className="mx-auto flex h-20 max-w-full items-center justify-between px-6 md:px-10">
-                {/* ── Logo ── */}
-                <a
-                    href="#hero"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    className="font-serif text-xl font-bold tracking-tight text-ink-900 transition-colors hover:text-accent-600 dark:text-cream-50 dark:hover:text-accent-600"
+            {/* ── Floating capsule wrapper ── */}
+            <div
+                className={`transition-all duration-300 ${
+                    scrolled ? 'px-3 pt-3 sm:px-5' : 'px-0 pt-0'
+                }`}
+            >
+                {/* Capsule pill: full-width transparent at top → detached floating pill */}
+                <div
+                    className={`mx-auto flex items-center justify-between transition-all duration-300 ${
+                        scrolled
+                            ? 'h-16 max-w-5xl rounded-full border border-cream-200 bg-cream-50/80 px-3 shadow-[0_8px_30px_rgba(36,31,27,0.10)] backdrop-blur-xl dark:border-warm-700 dark:bg-warm-900/80 dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)]'
+                            : 'h-20 max-w-full rounded-none border-transparent bg-transparent px-6 shadow-none md:px-10'
+                    }`}
                 >
-                    Arsitektura<span className="text-accent-600">.</span>
-                </a>
+                    {/* ── Logo ── */}
+                    <a
+                        href="#hero"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="font-serif text-xl font-bold tracking-tight text-ink-900 transition-colors hover:text-accent-600 dark:text-cream-50 dark:hover:text-accent-600"
+                    >
+                        Arsitektura<span className="text-accent-600">.</span>
+                    </a>
 
-                {/* ── Desktop ── */}
-                <ul className="hidden items-center gap-1 md:flex">
-                    {NAV_ITEMS.map((item) => (
-                        <li key={item.id}>
+                    {/* ── Desktop ── */}
+                    <ul className="hidden items-center gap-1 md:flex">
+                        {NAV_ITEMS.map((item) => (
+                            <li key={item.id}>
+                                <button
+                                    onClick={() => scrollTo(item.id)}
+                                    className={`rounded-full px-4 py-1.5 text-[0.8125rem] font-medium leading-tight transition-all duration-200 ${
+                                        activeId === item.id
+                                            ? 'bg-accent-600/10 text-accent-700 dark:bg-accent-600/15 dark:text-accent-600'
+                                            : 'text-ink-500 hover:bg-cream-100 hover:text-ink-900 dark:text-ink-300 dark:hover:bg-warm-700/50 dark:hover:text-cream-50'
+                                    }`}
+                                >
+                                    {item.label}
+                                </button>
+                            </li>
+                        ))}
+                        <li className="ml-2 flex items-center">
+                            <ThemeToggle />
+                        </li>
+                        <li className="ml-2">
                             <button
-                                onClick={() => scrollTo(item.id)}
-                                className={`rounded-full px-4 py-1.5 text-[0.8125rem] font-medium leading-tight transition-all duration-200 ${
-                                    activeId === item.id
-                                        ? 'bg-accent-600/10 text-accent-700 dark:bg-accent-600/15 dark:text-accent-600'
-                                        : 'text-ink-500 hover:bg-cream-100 hover:text-ink-900 dark:text-ink-300 dark:hover:bg-warm-700/50 dark:hover:text-cream-50'
-                                }`}
+                                onClick={() => scrollTo('kontak')}
+                                className="rounded-full bg-accent-600 px-5 py-1.5 text-[0.8125rem] font-semibold leading-tight text-cream-50 transition-all duration-200 hover:bg-accent-700 active:scale-[0.98]"
                             >
-                                {item.label}
+                                Hubungi Kami
                             </button>
                         </li>
-                    ))}
-                    <li className="ml-2 flex items-center">
-                        <ThemeToggle />
-                    </li>
-                    <li className="ml-2">
-                        <button
-                            onClick={() => scrollTo('kontak')}
-                            className="rounded-full bg-accent-600 px-5 py-1.5 text-[0.8125rem] font-semibold leading-tight text-cream-50 transition-all duration-200 hover:bg-accent-700 active:scale-[0.98]"
-                        >
-                            Hubungi Kami
-                        </button>
-                    </li>
-                </ul>
+                    </ul>
 
-                {/* ── Mobile toggle ── */}
-                <button
-                    className="flex h-10 w-10 items-center justify-center rounded-full text-ink-900 transition-colors hover:bg-cream-100 dark:text-cream-50 dark:hover:bg-warm-700/50 md:hidden"
-                    onClick={() => setMobileOpen(!mobileOpen)}
-                    aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
-                >
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        className="h-5 w-5"
+                    {/* ── Mobile toggle ── */}
+                    <button
+                        className="flex h-10 w-10 items-center justify-center rounded-full text-ink-900 transition-colors hover:bg-cream-100 dark:text-cream-50 dark:hover:bg-warm-700/50 md:hidden"
+                        onClick={() => setMobileOpen(!mobileOpen)}
+                        aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
                     >
-                        {mobileOpen ? (
-                            <>
-                                <line x1="6" y1="6" x2="18" y2="18" />
-                                <line x1="6" y1="18" x2="18" y2="6" />
-                            </>
-                        ) : (
-                            <>
-                                <line x1="4" y1="7" x2="20" y2="7" />
-                                <line x1="4" y1="12" x2="16" y2="12" />
-                                <line x1="4" y1="17" x2="20" y2="17" />
-                            </>
-                        )}
-                    </svg>
-                </button>
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            className="h-5 w-5"
+                        >
+                            {mobileOpen ? (
+                                <>
+                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                    <line x1="6" y1="18" x2="18" y2="6" />
+                                </>
+                            ) : (
+                                <>
+                                    <line x1="4" y1="7" x2="20" y2="7" />
+                                    <line x1="4" y1="12" x2="16" y2="12" />
+                                    <line x1="4" y1="17" x2="20" y2="17" />
+                                </>
+                            )}
+                        </svg>
+                    </button>
+                </div>
             </div>
 
-            {/* ── Mobile dropdown ── */}
+            {/* ── Mobile dropdown (aligns under the pill) ── */}
             {mobileOpen && (
-                <div className="border-t border-cream-200 bg-cream-50 px-6 pb-6 pt-4 md:hidden dark:border-warm-700 dark:bg-warm-900">
+                <div
+                    className={`transition-all duration-300 md:hidden ${
+                        scrolled
+                            ? 'mx-3 mt-2 rounded-2xl border border-cream-200 bg-cream-50/90 pb-6 pt-3 shadow-[0_8px_30px_rgba(36,31,27,0.10)] backdrop-blur-xl dark:border-warm-700 dark:bg-warm-900/90 dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)] sm:mx-5'
+                            : 'border-t border-cream-200 bg-cream-50 px-6 pb-6 pt-4 dark:border-warm-700 dark:bg-warm-900'
+                    }`}
+                >
                     <ul className="flex flex-col gap-1">
                         {NAV_ITEMS.map((item) => (
                             <li key={item.id}>
