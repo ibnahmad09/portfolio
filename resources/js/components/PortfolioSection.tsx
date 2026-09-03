@@ -42,7 +42,7 @@ export function Portfolio() {
             id="portofolio"
             className="bg-cream-100 py-24 dark:bg-warm-800 md:py-28"
         >
-            <div className="mx-auto max-w-6xl px-6 md:px-10">
+            <div className="mx-auto max-w-full px-6 md:px-10">
                 {/* Heading */}
                 <div ref={headingRef} className="reveal flex flex-col items-start gap-3 md:flex-row md:items-end md:justify-between">
                     <h2 className="max-w-lg font-serif text-[clamp(1.9rem,3vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-ink-900 dark:text-cream-50">
@@ -59,7 +59,7 @@ export function Portfolio() {
                 {/* Masonry-like grid: mixed aspect ratios */}
                 <div
                     ref={gridRef}
-                    className="reveal mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-12 lg:gap-5"
+                    className="reveal mt-12 mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-12 lg:gap-5"
                 >
                     {PROJECTS.map((p, i) => (
                         <a

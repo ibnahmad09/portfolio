@@ -34,7 +34,7 @@ export function ProcessSection() {
             id="proses"
             className="bg-cream-50 py-24 dark:bg-warm-900 md:py-28"
         >
-            <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+            <div className="mx-auto grid max-w-full grid-cols-1 gap-12 px-6 md:px-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-24">
                 {/* Left: intro */}
                 <div ref={headingRef} className="reveal lg:sticky lg:top-28 lg:self-start">
                     <h2 className="font-serif text-[clamp(1.9rem,3vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-ink-900 dark:text-cream-50">
@@ -50,7 +50,7 @@ export function ProcessSection() {
                 </div>
 
                 {/* Right: accordion */}
-                <div ref={listRef} className="reveal">
+                <div ref={listRef} className="reveal w-full max-w-2xl">
                     {STEPS.map((s, i) => {
                         const isOpen = open === i;
                         return (

@@ -27,7 +27,7 @@ export function Testimonials() {
             id="testimoni"
             className="bg-cream-100 py-24 dark:bg-warm-800 md:py-28"
         >
-            <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:px-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+            <div className="mx-auto grid max-w-full grid-cols-1 gap-12 px-6 md:px-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-24">
                 {/* Left: intro */}
                 <div ref={headingRef} className="reveal lg:pt-2">
                     <h2 className="font-serif text-[clamp(1.9rem,3vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-ink-900 dark:text-cream-50">
@@ -44,7 +44,7 @@ export function Testimonials() {
                 </div>
 
                 {/* Right: cards (vertical stack) */}
-                <div ref={gridRef} className="reveal stagger-children flex flex-col gap-6">
+                <div ref={gridRef} className="reveal stagger-children flex w-full max-w-2xl flex-col gap-6">
                     {TESTIMONIALS.map((t, i) => (
                         <div
                             key={i}

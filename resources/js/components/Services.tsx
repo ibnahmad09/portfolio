@@ -26,7 +26,7 @@ export function Services() {
 
     return (
         <section id="layanan" className="bg-cream-50 py-24 dark:bg-warm-900 md:py-28">
-            <div className="mx-auto max-w-6xl px-6 md:px-10">
+            <div className="mx-auto max-w-full px-6 md:px-10">
                 {/* Heading — stacked vertically */}
                 <div ref={headingRef} className="reveal max-w-2xl">
                     <h2 className="font-serif text-[clamp(1.9rem,3vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-ink-900 dark:text-cream-50">
@@ -41,7 +41,7 @@ export function Services() {
                 {/* Asymmetric grid: tall featured card + stacked cards + full-width footer card */}
                 <div
                     ref={gridRef}
-                    className="reveal stagger-children mt-14 grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-5"
+                    className="reveal stagger-children mt-14 mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 md:grid-cols-12 md:gap-5"
                 >
                     {SERVICES.map((s, i) => (
                         <div

@@ -70,10 +70,10 @@ export function Contact() {
 
     return (
         <section id="kontak" className="bg-cream-100 py-24 dark:bg-warm-800 md:py-28">
-            <div className="mx-auto max-w-6xl px-6 md:px-10">
+            <div className="mx-auto max-w-full px-6 md:px-10">
                 <div
                     ref={ref}
-                    className="reveal grid grid-cols-1 gap-12 rounded-3xl border border-cream-200 bg-cream-50 p-8 md:p-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16 dark:border-warm-700 dark:bg-warm-900"
+                    className="reveal mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 rounded-3xl border border-cream-200 bg-cream-50 p-8 md:p-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16 dark:border-warm-700 dark:bg-warm-900"
                 >
                     {/* Left: intro & info */}
                     <div>

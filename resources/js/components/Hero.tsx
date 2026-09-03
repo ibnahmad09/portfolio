@@ -17,7 +17,7 @@ export function Hero() {
             id="hero"
             className="relative flex min-h-[100dvh] items-center overflow-hidden bg-cream-50 dark:bg-warm-900"
         >
-            <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-6 pt-24 pb-12 md:grid-cols-[1fr_0.9fr] md:gap-16 md:px-10 lg:gap-20">
+            <div className="mx-auto grid w-full max-w-full grid-cols-1 items-center gap-12 px-6 pt-24 pb-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:gap-16 md:px-10 lg:gap-24">
                 {/* ── Left: Copy ── */}
                 <div ref={textRef} className="reveal">
                     <p className="mb-5 font-serif text-sm tracking-[0.14em] text-accent-600 dark:text-accent-600">
@@ -61,7 +61,7 @@ export function Hero() {
                 {/* ── Right: Visual composition ── */}
                 <div
                     ref={visualRef}
-                    className="reveal relative hidden aspect-[4/4.2] w-full justify-self-end md:flex"
+                    className="reveal relative hidden aspect-[4/4.2] w-full justify-self-end md:flex md:max-w-[30rem] lg:max-w-[34rem]"
                 >
                     {/* Main card */}
                     <div className="absolute top-[4%] right-0 bottom-[4%] left-[10%] overflow-hidden rounded-[1.25rem] bg-gradient-to-br from-accent-600/8 via-accent-600/12 to-accent-600/4 shadow-card dark:from-accent-600/8 dark:via-accent-600/10 dark:to-accent-600/5">

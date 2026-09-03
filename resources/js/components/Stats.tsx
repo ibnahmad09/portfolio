@@ -29,7 +29,7 @@ export function Stats() {
 
     return (
         <section className="bg-cream-50 dark:bg-warm-900">
-            <div className="mx-auto max-w-6xl px-6 md:px-10">
+            <div className="mx-auto max-w-full px-6 md:px-10">
                 <div
                     ref={ref}
                     className="reveal -mt-6 grid grid-cols-2 gap-x-6 gap-y-10 rounded-2xl border border-cream-200 bg-cream-100 px-8 py-9 dark:border-warm-700 dark:bg-warm-800 md:mt-0 md:grid-cols-4"

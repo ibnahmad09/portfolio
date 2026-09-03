@@ -1,7 +1,7 @@
 export function Footer() {
     return (
         <footer className="border-t border-cream-200 bg-cream-50 py-10 dark:border-warm-700 dark:bg-warm-900">
-            <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-center md:flex-row md:px-10 md:text-left">
+            <div className="mx-auto flex max-w-full flex-col items-center justify-between gap-4 px-6 text-center md:flex-row md:px-10 md:text-left">
                 <div>
                     <span className="font-serif text-lg font-bold text-ink-900 dark:text-cream-50">
                         Arsitektura<span className="text-accent-600">.</span>

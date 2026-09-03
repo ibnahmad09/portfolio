@@ -105,7 +105,7 @@ export function Nav() {
                     : 'bg-transparent'
             }`}
         >
-            <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6 md:px-10">
+            <div className="mx-auto flex h-20 max-w-full items-center justify-between px-6 md:px-10">
                 {/* ── Logo ── */}
                 <a
                     href="#hero"
