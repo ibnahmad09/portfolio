@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTheme } from '@/hooks/use-theme';
 
 const NAV_ITEMS = [
     { id: 'layanan', label: 'Layanan' },
@@ -8,6 +9,49 @@ const NAV_ITEMS = [
     { id: 'harga', label: 'Harga' },
     { id: 'kontak', label: 'Kontak' },
 ] as const;
+
+/** Quiet light/dark toggle matching the pill-button language used in the nav. */
+function ThemeToggle() {
+    const { theme, toggleTheme } = useTheme();
+    const isDark = theme === 'dark';
+
+    return (
+        <button
+            onClick={toggleTheme}
+            aria-label="Ganti tema gelap/terang"
+            title={isDark ? 'Ganti ke tema terang' : 'Ganti ke tema gelap'}
+            className="flex h-10 w-10 items-center justify-center rounded-full text-ink-500 transition-colors hover:bg-cream-100 hover:text-ink-900 active:scale-[0.97] dark:text-ink-300 dark:hover:bg-warm-700/50 dark:hover:text-cream-50"
+        >
+            {isDark ? (
+                /* Sun (shown when dark theme is active — switch to light) */
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    className="h-5 w-5"
+                >
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                </svg>
+            ) : (
+                /* Moon (shown when light theme is active — switch to dark) */
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-5 w-5"
+                >
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+            )}
+        </button>
+    );
+}
 
 export function Nav() {
     const [activeId, setActiveId] = useState<string>('layanan');
@@ -90,7 +134,10 @@ export function Nav() {
                             </button>
                         </li>
                     ))}
-                    <li className="ml-3">
+                    <li className="ml-2 flex items-center">
+                        <ThemeToggle />
+                    </li>
+                    <li className="ml-2">
                         <button
                             onClick={() => scrollTo('kontak')}
                             className="rounded-full bg-accent-600 px-5 py-1.5 text-[0.8125rem] font-semibold leading-tight text-cream-50 transition-all duration-200 hover:bg-accent-700 active:scale-[0.98]"
@@ -148,10 +195,16 @@ export function Nav() {
                                 </button>
                             </li>
                         ))}
-                        <li className="mt-2">
+                        <li className="mt-3 flex items-center justify-between border-t border-cream-200 pt-4 dark:border-warm-700">
+                            <span className="flex items-center gap-3">
+                                <ThemeToggle />
+                                <span className="text-sm font-medium text-ink-500 dark:text-ink-300">
+                                    Ganti tema
+                                </span>
+                            </span>
                             <button
                                 onClick={() => scrollTo('kontak')}
-                                className="w-full rounded-full bg-accent-600 px-5 py-2.5 text-sm font-semibold text-cream-50 transition-all hover:bg-accent-700 active:scale-[0.98]"
+                                className="rounded-full bg-accent-600 px-5 py-2.5 text-sm font-semibold text-cream-50 transition-all hover:bg-accent-700 active:scale-[0.98]"
                             >
                                 Hubungi Kami
                             </button>

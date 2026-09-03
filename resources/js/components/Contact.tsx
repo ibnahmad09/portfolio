@@ -1,11 +1,15 @@
 import { useState, type FormEvent } from 'react';
 import { useReveal } from '@/hooks/use-reveal';
 
+// Single source of truth for the business WhatsApp number (international format).
+// mock: ganti nomor WhatsApp sesungguhnya
+const WHATSAPP_NUMBER = '6281234567890';
+
 const CONTACT_INFO = [
     {
         label: 'WhatsApp',
         value: '0812-3456-7890',
-        // mock: nomor WhatsApp sesungguhnya
+        // display value; actual number lives in WHATSAPP_NUMBER above
     },
     {
         label: 'Email',
@@ -45,10 +49,20 @@ export function Contact() {
         if (!form.phone.trim()) next.phone = 'Nomor WhatsApp perlu diisi.';
         if (!form.message.trim()) next.message = 'Ceritakan sedikit kebutuhan Anda.';
         setErrors(next);
-        if (Object.keys(next).length === 0) {
-            // mock: hubungkan dengan backend / WhatsApp di sini
-            setSubmitted(true);
-        }
+        if (Object.keys(next).length > 0) return;
+
+        const { name, phone, message } = form;
+        const text = [
+            `Halo, saya ${name}. Saya mau konsultasi pembuatan website.`,
+            '',
+            message,
+            '',
+            `Nomor saya: ${phone}`,
+        ].join('\n');
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank', 'noopener');
+
+        setSubmitted(true);
     };
 
     const inputStyles =

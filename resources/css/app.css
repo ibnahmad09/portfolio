@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+/* Class-based dark mode: `dark:` variants respond to a `.dark` class on <html>.
+   The use-theme hook and the FOUC guard in app.tsx manage that class. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
