@@ -1,8 +1,30 @@
+import { motion, MotionConfig } from 'motion/react';
+import type { CSSProperties } from 'react';
 import { useReveal } from '@/hooks/use-reveal';
+
+// Scoped styles for the stacked offset text-shadow (3D letterpress effect).
+// Kept local to this component; no global CSS changes.
+const heroStyles = `
+.hero-stack-shadow {
+    text-shadow:
+        0 1px 0 var(--hstack-a),
+        1px 2px 0 var(--hstack-b),
+        2px 3px 0 var(--hstack-c),
+        3px 4px 0 var(--hstack-d),
+        4px 5px 0 var(--hstack-e);
+}
+.dark .hero-stack-shadow {
+    text-shadow:
+        0 1px 0 var(--hstack-a),
+        1px 2px 0 var(--hstack-b),
+        2px 3px 0 var(--hstack-c),
+        3px 4px 0 var(--hstack-c),
+        4px 5px 0 var(--hstack-d);
+}
+`;
 
 export function Hero() {
     const textRef = useReveal(0.2);
-    const visualRef = useReveal(0.1);
 
     const scrollTo = (id: string) => {
         const el = document.getElementById(id);
@@ -12,97 +34,257 @@ export function Hero() {
         }
     };
 
+    // Floating client cards (fictional UMKM — placeholder content).
+    // mock: ganti nama & deskripsi klien dengan contoh nyata
+    const clientCards = [
+        {
+            initial: 'R',
+            name: 'Kedai Roti Sangkuriang',
+            desc: 'Website profil, pesanan lancar',
+            color: 'bg-accent-600',
+        },
+        {
+            initial: 'K',
+            name: 'Kopi Nugraha',
+            desc: 'Toko online dibuka',
+            color: 'bg-accent-700',
+        },
+        {
+            initial: 'J',
+            name: 'Jahit Berkah',
+            desc: 'Booking online tersedia',
+            color: 'bg-accent-800',
+        },
+    ];
+
     return (
-        <section
-            id="hero"
-            className="relative flex min-h-[100dvh] items-center overflow-hidden bg-cream-50 dark:bg-warm-900"
-        >
-            <div className="mx-auto grid w-full max-w-full grid-cols-1 items-center gap-12 px-6 pt-24 pb-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:gap-16 md:px-10 lg:gap-24">
-                {/* ── Left: Copy ── */}
-                <div ref={textRef} className="reveal">
-                    <p className="mb-5 font-serif text-sm tracking-[0.14em] text-accent-600 dark:text-accent-600">
-                        Web Design untuk UMKM
-                    </p>
+        <MotionConfig reducedMotion="user">
+            <section
+                id="hero"
+                className="relative flex min-h-[100dvh] flex-col overflow-hidden bg-cream-50 dark:bg-warm-900"
+            >
+                <style>{heroStyles}</style>
 
-                    <h1 className="font-serif text-[clamp(2.25rem,4.5vw,3.75rem)] font-bold leading-[1.08] tracking-tight text-ink-900 dark:text-cream-50">
-                        Website yang bikin{' '}
-                        <span className="text-accent-600">bisnis Anda</span>{' '}
-                        dipercaya pelanggan.
-                    </h1>
-
-                    <p className="mt-6 max-w-md text-base leading-relaxed text-ink-500 dark:text-ink-300">
-                        Kami bantu UMKM lokal punya website profesional yang{' '}
-                        <em className="not-italic text-ink-900 dark:text-cream-100">
-                            menarik
-                        </em>{' '}
-                        pelanggan dan{' '}
-                        <em className="not-italic text-ink-900 dark:text-cream-100">
-                            meningkatkan penjualan
-                        </em>
-                        .
-                    </p>
-
-                    <div className="mt-9 flex flex-wrap items-center gap-4">
-                        <button
-                            onClick={() => scrollTo('kontak')}
-                            className="rounded-full bg-accent-600 px-7 py-3 text-sm font-semibold leading-tight text-cream-50 shadow-[0_2px_8px_rgba(160,90,44,0.25)] transition-all duration-200 hover:bg-accent-700 hover:shadow-[0_4px_16px_rgba(160,90,44,0.3)] active:scale-[0.97]"
-                        >
-                            Konsultasi Gratis
-                        </button>
-                        <button
-                            onClick={() => scrollTo('portofolio')}
-                            className="rounded-full border border-cream-200 bg-transparent px-7 py-3 text-sm font-semibold leading-tight text-ink-700 transition-all duration-200 hover:border-cream-200 hover:bg-cream-100 active:scale-[0.97] dark:border-warm-700 dark:text-cream-100 dark:hover:bg-warm-700/50"
-                        >
-                            Lihat Portofolio
-                        </button>
-                    </div>
-                </div>
-
-                {/* ── Right: Visual composition ── */}
+                {/* ── Background: subtle grid + warm glow ── */}
                 <div
-                    ref={visualRef}
-                    className="reveal relative hidden aspect-[4/4.2] w-full justify-self-end md:flex md:max-w-[30rem] lg:max-w-[34rem]"
-                >
-                    {/* Main card */}
-                    <div className="absolute top-[4%] right-0 bottom-[4%] left-[10%] overflow-hidden rounded-[1.25rem] bg-gradient-to-br from-accent-600/8 via-accent-600/12 to-accent-600/4 shadow-card dark:from-accent-600/8 dark:via-accent-600/10 dark:to-accent-600/5">
-                        {/* Watermark name */}
-                        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                            <span className="translate-y-4 font-serif text-[clamp(3rem,8vw,6.5rem)] font-bold leading-none text-ink-900/[0.035] select-none dark:text-cream-50/[0.04]">
-                                Arsitektura
+                    className="pointer-events-none absolute inset-0 opacity-[0.5] dark:opacity-[0.4]"
+                    style={{
+                        backgroundImage: [
+                            'linear-gradient(to right, rgba(160,90,44,0.055) 1px, transparent 1px)',
+                            'linear-gradient(to bottom, rgba(160,90,44,0.055) 1px, transparent 1px)',
+                            'radial-gradient(60% 55% at 85% 8%, rgba(160,90,44,0.10), transparent 70%)',
+                        ].join(', '),
+                        backgroundSize: '56px 56px, 56px 56px, 100% 100%',
+                    }}
+                />
+
+                {/* Vignette to anchor the bottom into the next section */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-cream-100/70 to-transparent dark:from-warm-800/70" />
+
+                {/* ── Centered composition ── */}
+                <div className="relative z-10 flex flex-1 items-center justify-center">
+                    <div
+                        ref={textRef}
+                        className="reveal mx-auto w-full max-w-3xl px-6 pt-28 pb-14 text-center"
+                    >
+                        <p className="mb-7 inline-flex items-center gap-2 rounded-full border border-accent-600/25 bg-accent-600/5 px-4 py-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-accent-700 dark:border-accent-600/30 dark:bg-accent-600/10 dark:text-accent-600">
+                            Web Design untuk UMKM Lokal
+                        </p>
+
+                        {/* Stacked headline, centered */}
+                        <h1 className="font-serif text-[clamp(2.75rem,9vw,6.5rem)] font-bold leading-[0.98] tracking-tight text-ink-900 dark:text-cream-50">
+                            <span
+                                className="hero-stack-shadow block"
+                                style={{ '--hstack-a': '#e8dcc9', '--hstack-b': '#e8dcc9', '--hstack-c': 'rgba(160,90,44,0.25)', '--hstack-d': 'rgba(160,90,44,0.35)', '--hstack-e': 'rgba(160,90,44,0.45)' } as CSSProperties}
+                            >
+                                Desain
                             </span>
-                        </div>
-                        {/* Decorative dot grid */}
-                        <div className="absolute top-16 left-16 grid grid-cols-5 gap-3">
-                            {Array.from({ length: 15 }).map((_, i) => (
-                                <div
-                                    key={i}
-                                    className="h-2 w-2 rounded-full bg-accent-600/15 dark:bg-accent-600/20"
-                                />
-                            ))}
-                        </div>
-                        {/* Accent stripe */}
-                        <div className="absolute bottom-0 left-0 h-[3px] w-2/5 bg-accent-600" />
-                        {/* Decorative circle */}
-                        <div className="absolute right-8 bottom-24 h-32 w-32 rounded-full border-2 border-accent-600/10 dark:border-accent-600/15" />
-                    </div>
+                            <span
+                                className="hero-stack-shadow block"
+                                style={{ '--hstack-a': '#e8dcc9', '--hstack-b': '#e8dcc9', '--hstack-c': 'rgba(160,90,44,0.25)', '--hstack-d': 'rgba(160,90,44,0.35)', '--hstack-e': 'rgba(160,90,44,0.45)' } as CSSProperties}
+                            >
+                                Website
+                            </span>
+                            <span className="block text-accent-600 dark:text-accent-600">
+                                untuk bisnis.
+                            </span>
+                        </h1>
 
-                    {/* Floating accent chip */}
-                    <div className="absolute top-[2%] right-4 z-10 rounded-2xl bg-accent-600 px-5 py-3 shadow-[0_8px_24px_rgba(160,90,44,0.3)]">
-                        <span className="block font-serif text-[1.65rem] font-bold leading-none text-cream-50">
-                            4+
-                        </span>
-                        <span className="mt-0.5 block text-[0.65rem] leading-tight text-cream-50/85">
-                            tahun pengalaman
-                        </span>
-                    </div>
+                        <p className="mx-auto mt-7 max-w-md text-base leading-relaxed text-ink-500 dark:text-ink-300">
+                            Bantu UMKM lokal tampil profesional online, dapatkan
+                            pelanggan baru, dan jualan jadi lebih mudah.
+                        </p>
 
-                    {/* Small decorative square */}
-                    <div className="absolute bottom-[10%] left-0 z-10 h-12 w-12 rounded-xl border-2 border-accent-600/20 dark:border-accent-600/25" />
+                        <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+                            <button
+                                onClick={() => scrollTo('kontak')}
+                                className="rounded-full bg-accent-600 px-8 py-3.5 text-sm font-semibold leading-tight text-cream-50 shadow-[0_2px_8px_rgba(160,90,44,0.28)] transition-all duration-200 hover:bg-accent-700 hover:shadow-[0_6px_18px_rgba(160,90,44,0.32)] active:scale-[0.97]"
+                            >
+                                Konsultasi Gratis
+                            </button>
+                            <button
+                                onClick={() => scrollTo('portofolio')}
+                                className="rounded-full border border-cream-200 bg-transparent px-8 py-3.5 text-sm font-semibold leading-tight text-ink-700 transition-all duration-200 hover:border-cream-200 hover:bg-cream-100 active:scale-[0.97] dark:border-warm-700 dark:text-cream-100 dark:hover:bg-warm-700/50"
+                            >
+                                Lihat Portofolio
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            {/* ── Bottom edge line ── */}
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cream-200 to-transparent dark:via-warm-700" />
-        </section>
+                {/* ── Decorative frame: floating cards + arrows (xl+ so there's gutter
+                       clear of the centered text) ── */}
+                <div className="pointer-events-none absolute inset-0 hidden xl:block">
+                    {/* Hand-drawn arrow → left cards */}
+                    <svg
+                        viewBox="0 0 200 120"
+                        fill="none"
+                        className="absolute left-[20%] top-[34%] w-36 -rotate-12 text-accent-600/60"
+                    >
+                        <path
+                            d="M10 95 C 70 30, 120 110, 175 20"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                        <path
+                            d="M150 14 l 30 -4 l -12 28"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+
+                    {/* Floating card 1 (top-left) */}
+                    <motion.div
+                        animate={{ y: [0, -14, 0] }}
+                        transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+                        className="absolute left-[5%] top-[16%] z-20 flex items-center gap-3 rounded-2xl border border-white/60 bg-white/70 p-4 shadow-card backdrop-blur-md dark:border-warm-700/60 dark:bg-warm-800/70 dark:shadow-card-dark"
+                    >
+                        <div
+                            className={`flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold text-cream-50 shadow-inner ${clientCards[0].color}`}
+                        >
+                            {clientCards[0].initial}
+                        </div>
+                        <div>
+                            <div className="text-sm font-semibold text-ink-900 dark:text-cream-50">
+                                {clientCards[0].name}
+                            </div>
+                            <div className="text-xs text-ink-500 dark:text-ink-300">
+                                {clientCards[0].desc}
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Floating card 2 (bottom-left) */}
+                    <motion.div
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+                        className="absolute bottom-[24%] left-[8%] z-10 flex items-center gap-3 rounded-2xl border border-white/60 bg-white/70 p-4 shadow-card backdrop-blur-md dark:border-warm-700/60 dark:bg-warm-800/70 dark:shadow-card-dark"
+                    >
+                        <div
+                            className={`flex h-11 w-11 items-center justify-center rounded-full text-base font-bold text-cream-50 shadow-inner ${clientCards[1].color}`}
+                        >
+                            {clientCards[1].initial}
+                        </div>
+                        <div>
+                            <div className="text-sm font-semibold text-ink-900 dark:text-cream-50">
+                                {clientCards[1].name}
+                            </div>
+                            <div className="text-xs text-ink-500 dark:text-ink-300">
+                                {clientCards[1].desc}
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Floating card 3 (top-right) */}
+                    <motion.div
+                        animate={{ y: [0, -12, 0] }}
+                        transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+                        className="absolute right-[5%] top-[18%] z-10 flex items-center gap-3 rounded-2xl border border-white/60 bg-white/70 p-4 shadow-card backdrop-blur-md dark:border-warm-700/60 dark:bg-warm-800/70 dark:shadow-card-dark"
+                    >
+                        <div
+                            className={`flex h-11 w-11 items-center justify-center rounded-full text-base font-bold text-cream-50 shadow-inner ${clientCards[2].color}`}
+                        >
+                            {clientCards[2].initial}
+                        </div>
+                        <div>
+                            <div className="text-sm font-semibold text-ink-900 dark:text-cream-50">
+                                {clientCards[2].name}
+                            </div>
+                            <div className="text-xs text-ink-500 dark:text-ink-300">
+                                {clientCards[2].desc}
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+
+                {/* ── Rotating circular badge (click → #kontak), framed lower-right ── */}
+                <button
+                    onClick={() => scrollTo('kontak')}
+                    aria-label="Mulai sekarang, konsultasi gratis"
+                    className="absolute bottom-[26%] right-[9%] z-30 hidden h-36 w-36 items-center justify-center rounded-full bg-cream-50 shadow-card transition-transform duration-200 hover:scale-105 active:scale-95 dark:bg-warm-800 dark:shadow-card-dark xl:flex"
+                >
+                    <motion.svg
+                        viewBox="0 0 120 120"
+                        className="h-28 w-28"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
+                    >
+                        <defs>
+                            <path
+                                id="badge-circle"
+                                d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"
+                            />
+                        </defs>
+                        <circle
+                            cx="60"
+                            cy="60"
+                            r="56"
+                            className="fill-none stroke-accent-600/25"
+                            strokeWidth="2"
+                        />
+                        <text className="fill-accent-700 text-[0.72rem] font-semibold tracking-[0.22em] dark:fill-accent-600">
+                            <textPath href="#badge-circle">
+                                MULAI SEKARANG • GRATIS KONSULTASI •
+                            </textPath>
+                        </text>
+                        <circle
+                            cx="60"
+                            cy="60"
+                            r="40"
+                            className="fill-accent-600"
+                        />
+                        <path
+                            d="M64 52 l12 8 -12 8"
+                            className="fill-none stroke-cream-50"
+                            strokeWidth="5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </motion.svg>
+                </button>
+
+                {/* ── Bottom feature strip (rounded top) ── */}
+                <div className="relative z-10 rounded-t-3xl border-t border-accent-600/15 bg-cream-100 dark:border-accent-600/20 dark:bg-warm-800">
+                    <div className="mx-auto flex max-w-full flex-col gap-6 px-6 py-7 md:px-10 md:flex-row md:items-center md:justify-between">
+                        {[
+                            'Desain sesuai identitas bisnis',
+                            'Responsif di semua layar',
+                            'Dukungan berkelanjutan',
+                        ].map((f) => (
+                            <div key={f} className="flex items-center gap-3 text-sm font-medium text-ink-700 dark:text-ink-300">
+                                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-600 text-xs font-bold text-cream-50">
+                                    ✓
+                                </span>
+                                {f}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        </MotionConfig>
     );
 }
