@@ -111,7 +111,7 @@ export function Nav() {
                 <div
                     className={`mx-auto flex items-center justify-between transition-all duration-300 ${
                         scrolled
-                            ? 'h-16 max-w-5xl rounded-full border border-cream-200 bg-cream-50/80 px-3 shadow-[0_8px_30px_rgba(36,31,27,0.10)] backdrop-blur-xl dark:border-warm-700 dark:bg-warm-900/80 dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)]'
+                            ? 'h-16 max-w-5xl rounded-full border border-cream-200 bg-cream-50/80 px-5 shadow-[0_8px_30px_rgba(36,31,27,0.10)] backdrop-blur-xl dark:border-warm-700 dark:bg-warm-900/80 dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)]'
                             : 'h-20 max-w-full rounded-none border-transparent bg-transparent px-6 shadow-none md:px-10'
                     }`}
                 >

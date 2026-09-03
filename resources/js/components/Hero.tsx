@@ -21,6 +21,89 @@ const heroStyles = `
         3px 4px 0 var(--hstack-c),
         4px 5px 0 var(--hstack-d);
 }
+
+/* ── Glow-border button (Warm & Bersahaja) ─────────────────────── */
+@property --glow-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.glow-btn {
+    position: relative;
+    animation: glow-pulse 2.8s ease-in-out infinite;
+}
+
+/* Rotating conic rim, masked to a thin pill ring */
+.glow-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    padding: 2px;
+    background: conic-gradient(
+        from var(--glow-angle),
+        rgba(160, 90, 44, 0.10) 0deg,
+        rgba(160, 90, 44, 0.30) 60deg,
+        #faf7f2 110deg,
+        #a05a2c 150deg,
+        rgba(160, 90, 44, 0.45) 200deg,
+        rgba(160, 90, 44, 0.10) 300deg,
+        rgba(160, 90, 44, 0.10) 360deg
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    animation: glow-spin 3.5s linear infinite;
+    pointer-events: none;
+}
+
+.dark .glow-btn::before {
+    background: conic-gradient(
+        from var(--glow-angle),
+        rgba(250, 247, 242, 0.06) 0deg,
+        rgba(250, 247, 242, 0.22) 60deg,
+        #a05a2c 120deg,
+        #faf7f2 160deg,
+        rgba(250, 247, 242, 0.28) 210deg,
+        rgba(250, 247, 242, 0.06) 300deg,
+        rgba(250, 247, 242, 0.06) 360deg
+    );
+}
+
+@keyframes glow-spin {
+    to { --glow-angle: 360deg; }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(160, 90, 44, 0), 0 8px 20px -8px rgba(160, 90, 44, 0.32);
+    }
+    50% {
+        box-shadow: 0 0 24px 3px rgba(160, 90, 44, 0.26), 0 10px 26px -6px rgba(160, 90, 44, 0.4);
+    }
+}
+
+.dark .glow-btn {
+    animation-name: glow-pulse-dark;
+}
+
+@keyframes glow-pulse-dark {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(250, 247, 242, 0), 0 8px 20px -8px rgba(0, 0, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 26px 3px rgba(250, 247, 242, 0.16), 0 10px 26px -6px rgba(0, 0, 0, 0.5);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .glow-btn,
+    .glow-btn::before {
+        animation: none;
+    }
+}
 `;
 
 export function Hero() {
@@ -115,16 +198,10 @@ export function Hero() {
                             pelanggan baru, dan jualan jadi lebih mudah.
                         </p>
 
-                        <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-                            <button
-                                onClick={() => scrollTo('kontak')}
-                                className="rounded-full bg-accent-600 px-8 py-3.5 text-sm font-semibold leading-tight text-cream-50 shadow-[0_2px_8px_rgba(160,90,44,0.28)] transition-all duration-200 hover:bg-accent-700 hover:shadow-[0_6px_18px_rgba(160,90,44,0.32)] active:scale-[0.97]"
-                            >
-                                Konsultasi Gratis
-                            </button>
+                        <div className="mt-9 flex items-center justify-center">
                             <button
                                 onClick={() => scrollTo('portofolio')}
-                                className="rounded-full border border-cream-200 bg-transparent px-8 py-3.5 text-sm font-semibold leading-tight text-ink-700 transition-all duration-200 hover:border-cream-200 hover:bg-cream-100 active:scale-[0.97] dark:border-warm-700 dark:text-cream-100 dark:hover:bg-warm-700/50"
+                                className="glow-btn rounded-full bg-cream-50/70 px-11 py-5 text-sm font-semibold leading-tight text-ink-800 transition-colors duration-200 hover:text-ink-900 active:scale-[0.97] dark:bg-warm-900/70 dark:text-cream-100 dark:hover:text-cream-50"
                             >
                                 Lihat Portofolio
                             </button>
