@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react';
 import { Nav } from '@/components/Nav';
 import { Hero } from '@/components/Hero';
+import { About } from '@/components/About';
 import { Stats } from '@/components/Stats';
 import { Services } from '@/components/Services';
 import { Portfolio } from '@/components/PortfolioSection';
@@ -27,6 +28,7 @@ export default function Welcome() {
 
                 <main>
                     <Hero />
+                    <About />
                     <Stats />
                     <Services />
                     <Portfolio />

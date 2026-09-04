@@ -1,8 +1,13 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export type Theme = 'light' | 'dark';
 
 const STORAGE_KEY = 'theme';
+
+// Matches the transition-duration in app.css (`html.theme-transition *`).
+// The gate class is removed after this window so normal hover/press
+// transitions are restored.
+const THEME_TRANSITION_MS = 500;
 
 function resolveInitialTheme(): Theme {
     if (typeof window === 'undefined') return 'light';
@@ -13,10 +18,30 @@ function resolveInitialTheme(): Theme {
 
 export function useTheme() {
     const [theme, setTheme] = useState<Theme>(resolveInitialTheme);
+    const firstApplyRef = useRef(true);
+    const clearTimerRef = useRef<number | null>(null);
 
     // Apply & persist the active theme to <html>.classList.
     useEffect(() => {
         const el = document.documentElement;
+
+        // Only cross-fade colors after the initial load. On mount the FOUC
+        // guard in app.tsx has already applied the correct `.dark` class, so
+        // animating then would look buggy. For every later change we briefly
+        // enable the color-only transition (see `.theme-transition` in
+        // app.css) so background/text/border/... cross-fade instead of
+        // snapping, then remove the gate to restore normal transitions.
+        const isFirstApply = firstApplyRef.current;
+        firstApplyRef.current = false;
+
+        if (!isFirstApply) {
+            el.classList.add('theme-transition');
+            if (clearTimerRef.current !== null) window.clearTimeout(clearTimerRef.current);
+            clearTimerRef.current = window.setTimeout(() => {
+                el.classList.remove('theme-transition');
+            }, THEME_TRANSITION_MS);
+        }
+
         if (theme === 'dark') {
             el.classList.add('dark');
         } else {

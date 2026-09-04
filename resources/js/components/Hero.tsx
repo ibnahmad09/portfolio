@@ -168,14 +168,14 @@ export function Hero() {
                 <div className="relative z-10 flex flex-1 items-center justify-center">
                     <div
                         ref={textRef}
-                        className="reveal mx-auto w-full max-w-3xl px-6 pt-28 pb-14 text-center"
+                        className="reveal mx-auto w-full max-w-4xl px-4 pt-28 pb-14 text-center"
                     >
                         <p className="mb-7 inline-flex items-center gap-2 rounded-full border border-accent-600/25 bg-accent-600/5 px-4 py-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-accent-700 dark:border-accent-600/30 dark:bg-accent-600/10 dark:text-accent-600">
                             Web Design untuk UMKM Lokal
                         </p>
 
                         {/* Stacked headline, centered */}
-                        <h1 className="font-serif text-[clamp(2.75rem,9vw,6.5rem)] font-bold leading-[0.98] tracking-tight text-ink-900 dark:text-cream-50">
+                        <h1 className="font-serif text-[clamp(2.75rem,9vw,6.5rem)] font-bold leading-[0.98] tracking-tight uppercase text-ink-900 dark:text-cream-50">
                             <span
                                 className="hero-stack-shadow block"
                                 style={{ '--hstack-a': '#e8dcc9', '--hstack-b': '#e8dcc9', '--hstack-c': 'rgba(160,90,44,0.25)', '--hstack-d': 'rgba(160,90,44,0.35)', '--hstack-e': 'rgba(160,90,44,0.45)' } as CSSProperties}

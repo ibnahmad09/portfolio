@@ -10,7 +10,7 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --font-serif: Georgia, ui-serif, 'Times New Roman', serif;
+    --font-serif: 'Spectral', ui-serif, Georgia, 'Times New Roman', serif;
 
     --color-cream-50: #faf7f2;
     --color-cream-100: #f3ecdf;
@@ -88,12 +88,42 @@
     box-shadow: var(--shadow-card-hover-dark);
 }
 
+/* ── Smooth theme cross-fade ────────────────────────────────────── */
+/* Active only while `theme-transition` is on <html> — the use-theme hook
+   adds it on a user-theme change (or a live OS-preference switch) and
+   removes it after the fade. Gating this way means:
+     • the initial load does NOT animate (the FOUC guard applies `.dark`
+       before React mounts), and
+     • once the fade finishes, normal hover/press transitions are restored.
+   Only color-bearing properties are transitioned — never transform,
+   opacity, dimensions, or background-images — so reveal animations, the
+   glow button, the floating cards (JS motion), and press-scale feedback
+   stay jank-free. */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+    transition-property: background-color, color, border-color,
+        border-top-color, border-right-color, border-bottom-color,
+        border-left-color, fill, stroke, box-shadow;
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* ── Reduced motion ─────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
     .reveal,
     .stagger-children > * {
         opacity: 1 !important;
         transform: none !important;
+        transition: none !important;
+    }
+
+    /* Theme switches snap instantly instead of cross-fading. */
+    html.theme-transition,
+    html.theme-transition *,
+    html.theme-transition *::before,
+    html.theme-transition *::after {
         transition: none !important;
     }
 }
