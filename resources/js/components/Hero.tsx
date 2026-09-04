@@ -193,7 +193,7 @@ export function Hero() {
                             </span>
                         </h1>
 
-                        <p className="mx-auto mt-7 max-w-md text-base leading-relaxed text-ink-500 dark:text-ink-300">
+                        <p className="mx-auto mt-7 max-w-md text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300">
                             Bantu UMKM lokal tampil profesional online, dapatkan
                             pelanggan baru, dan jualan jadi lebih mudah.
                         </p>

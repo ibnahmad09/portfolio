@@ -48,7 +48,7 @@ export function Pricing() {
                     <h2 className="font-serif text-[clamp(1.9rem,3vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-ink-900 dark:text-cream-50">
                         Harga yang jelas, tanpa biaya tersembunyi
                     </h2>
-                    <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-ink-500 dark:text-ink-300">
+                    <p className="mt-5 max-w-xl text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300">
                         Setiap proyek berbeda, jadi kami diskusikan dulu sebelum
                         menentukan angka. Berikut gambaran awal sebagai titik mulai.
                     </p>

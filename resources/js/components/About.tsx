@@ -54,11 +54,11 @@ export function About() {
                         Situs untuk UMKM yang
                         <br className="hidden md:block" />
                         tumbuh&nbsp;
-                        <span className="italic text-accent-600 dark:text-accent-600">
+                        <span className="  text-accent-600 dark:text-accent-600">
                             percaya diri
                         </span>
                     </h2>
-                    <p className="mt-6 max-w-xl text-[0.95rem] leading-relaxed text-ink-500 dark:text-ink-300">
+                    <p className="mt-6 max-w-xl text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300 font-normal">
                         Arsitektura adalah studio web-design untuk UMKM lokal. Kami
                         membangun kehadiran online yang sederhana dan jujur—supaya
                         usaha kecil bisa bersaing dengan profesional dan pelanggan

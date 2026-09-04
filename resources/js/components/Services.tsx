@@ -32,7 +32,7 @@ export function Services() {
                     <h2 className="font-serif text-[clamp(1.9rem,3vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-ink-900 dark:text-cream-50">
                         Layanan yang kami tawarkan
                     </h2>
-                    <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-ink-500 dark:text-ink-300">
+                    <p className="mt-5 max-w-xl text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300">
                         Semua kebutuhan digital bisnis Anda bisa kami tangani dalam satu
                         tim—mulai dari website pertama hingga sistem yang terus berjalan.
                     </p>

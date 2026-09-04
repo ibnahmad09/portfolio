@@ -80,7 +80,7 @@ export function Contact() {
                         <h2 className="font-serif text-[clamp(1.9rem,3vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-ink-900 dark:text-cream-50">
                             Mau mulai? Mari ngobrol dulu.
                         </h2>
-                        <p className="mt-5 max-w-md text-[0.95rem] leading-relaxed text-ink-500 dark:text-ink-300">
+                        <p className="mt-5 max-w-md text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300">
                             Ceritakan kebutuhan dan kondisi bisnis Anda. Kami akan
                             mencari tahu apa yang paling membantu, tanpa biaya dan tanpa
                             kewajiban untuk lanjut.
@@ -122,7 +122,7 @@ export function Contact() {
                         {submitted ? (
                             <div className="flex h-full flex-col items-start justify-center rounded-2xl border border-accent-600/30 bg-accent-600/5 p-8 text-ink-900 dark:text-cream-50">
                                 <h3 className="font-serif text-2xl font-bold">Terima kasih!</h3>
-                                <p className="mt-3 max-w-sm text-[0.95rem] leading-relaxed text-ink-500 dark:text-ink-300">
+                                <p className="mt-3 max-w-sm text-[1.05rem] leading-relaxed text-ink-500 dark:text-ink-300">
                                     Pesan Anda sudah kami terima. Tim kami akan menghubungi
                                     Anda secepatnya melalui WhatsApp.
                                 </p>

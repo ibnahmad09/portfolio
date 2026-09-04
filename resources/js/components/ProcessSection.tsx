@@ -40,7 +40,7 @@ export function ProcessSection() {
                     <h2 className="font-serif text-[clamp(1.9rem,3vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-ink-900 dark:text-cream-50">
                         Begini cara kami bekerja
                     </h2>
-                    <p className="mt-5 max-w-md text-[0.95rem] leading-relaxed text-ink-500 dark:text-ink-300">
+                    <p className="mt-5 max-w-md text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300">
                         Proses yang jelas dan transparan, supaya Anda tahu persis apa
                         yang terjadi pada setiap langkah. Tidak ada kejutan di akhir.
                     </p>
@@ -104,7 +104,7 @@ export function ProcessSection() {
                                     }`}
                                 >
                                     <div className="overflow-hidden">
-                                        <p className="pl-[3.1rem] pr-2 text-[0.92rem] leading-relaxed text-ink-500 dark:text-ink-300">
+                                        <p className="pl-[3.1rem] pr-2 text-[1rem] leading-relaxed text-ink-500 dark:text-ink-300">
                                             {s.desc}
                                         </p>
                                     </div>
