@@ -3,6 +3,7 @@ import { Nav } from '@/components/Nav';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
 import { Stats } from '@/components/Stats';
+import { WhyWebsite } from '@/components/WhyWebsite';
 import { Services } from '@/components/Services';
 import { Portfolio } from '@/components/PortfolioSection';
 import { ProcessSection } from '@/components/ProcessSection';
@@ -30,6 +31,7 @@ export default function Welcome() {
                     <Hero />
                     <About />
                     <Stats />
+                    <WhyWebsite />
                     <Services />
                     <Portfolio />
                     <ProcessSection />

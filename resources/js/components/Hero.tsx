@@ -1,6 +1,7 @@
 import { motion, MotionConfig } from 'motion/react';
 import type { CSSProperties } from 'react';
 import { useReveal } from '@/hooks/use-reveal';
+import { ServicesCard } from '@/components/ServicesCard';
 
 // Scoped styles for the stacked offset text-shadow (3D letterpress effect).
 // Kept local to this component; no global CSS changes.
@@ -193,9 +194,11 @@ export function Hero() {
                             </span>
                         </h1>
 
-                        <p className="mx-auto mt-7 max-w-md text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300">
+                        <p className="mx-auto mt-7 max-w-3xl text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300">
                             Bantu UMKM lokal tampil profesional online, dapatkan
-                            pelanggan baru, dan jualan jadi lebih mudah.
+                            pelanggan baru, dan jualan jadi lebih mudah. Dari
+                            company profile hingga sistem manajemen sekolah, kami
+                            siap mewujudkan website impian Anda.
                         </p>
 
                         <div className="mt-9 flex items-center justify-center">
@@ -206,6 +209,9 @@ export function Hero() {
                                 Lihat Portofolio
                             </button>
                         </div>
+
+                        {/* Services Card */}
+                        <ServicesCard className="mx-auto mt-10 max-w-4xl" />
                     </div>
                 </div>
 
@@ -344,23 +350,7 @@ export function Hero() {
                     </motion.svg>
                 </button>
 
-                {/* ── Bottom feature strip (rounded top) ── */}
-                <div className="relative z-10 rounded-t-3xl border-t border-accent-600/15 bg-cream-100 dark:border-accent-600/20 dark:bg-warm-800">
-                    <div className="mx-auto flex max-w-full flex-col gap-6 px-6 py-7 md:px-10 md:flex-row md:items-center md:justify-between">
-                        {[
-                            'Desain sesuai identitas bisnis',
-                            'Responsif di semua layar',
-                            'Dukungan berkelanjutan',
-                        ].map((f) => (
-                            <div key={f} className="flex items-center gap-3 text-sm font-medium text-ink-700 dark:text-ink-300">
-                                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-600 text-xs font-bold text-cream-50">
-                                    ✓
-                                </span>
-                                {f}
-                            </div>
-                        ))}
-                    </div>
-                </div>
+
             </section>
         </MotionConfig>
     );
