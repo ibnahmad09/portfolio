@@ -9,7 +9,7 @@ import { Portfolio } from '@/components/PortfolioSection';
 import { ProcessSection } from '@/components/ProcessSection';
 import { Testimonials } from '@/components/Testimonials';
 import { Pricing } from '@/components/Pricing';
-import { Contact } from '@/components/Contact';
+import { CtaSection } from '@/components/CtaSection';
 import { Footer } from '@/components/Footer';
 
 /**
@@ -21,7 +21,7 @@ export default function Welcome() {
         <>
             <Head title="Beranda" />
 
-            <div className="relative min-h-[100dvh] bg-cream-50 font-sans text-ink-900 antialiased dark:bg-warm-900 dark:text-cream-50">
+            <div className="bg-cream-50 text-ink-900 dark:bg-warm-900 dark:text-cream-50 relative min-h-[100dvh] font-sans antialiased">
                 {/* Grain overlay */}
                 <div className="grain pointer-events-none fixed inset-0 z-[9000]" />
 
@@ -37,7 +37,7 @@ export default function Welcome() {
                     <ProcessSection />
                     <Testimonials />
                     <Pricing />
-                    <Contact />
+                    <CtaSection />
                 </main>
 
                 <Footer />
