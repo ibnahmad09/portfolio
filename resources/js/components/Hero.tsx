@@ -304,9 +304,9 @@ export function Hero() {
                     </motion.div>
                 </div>
 
-                {/* ── Rotating circular badge (click → #kontak), framed lower-right ── */}
+                {/* ── Rotating circular badge (click → #cta), framed lower-right ── */}
                 <button
-                    onClick={() => scrollTo('kontak')}
+                    onClick={() => scrollTo('cta')}
                     aria-label="Mulai sekarang, konsultasi gratis"
                     className="absolute bottom-[26%] right-[9%] z-30 hidden h-36 w-36 items-center justify-center rounded-full bg-cream-50 shadow-card transition-transform duration-200 hover:scale-105 active:scale-95 dark:bg-warm-800 dark:shadow-card-dark xl:flex"
                 >

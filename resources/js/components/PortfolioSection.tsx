@@ -104,7 +104,7 @@ export function Portfolio() {
                         Karya yang sudah kami buat
                     </h2>
                     <a
-                        href="#kontak"
+                        href="#cta"
                         className="mt-6 inline-flex items-center gap-2 rounded-full border border-cream-200 bg-transparent px-5 py-2.5 text-sm font-semibold leading-tight text-ink-700 transition-all hover:bg-cream-50 active:scale-[0.98] dark:border-warm-700 dark:text-cream-100 dark:hover:bg-warm-700/50"
                     >
                         Ceritakan proyek Anda →

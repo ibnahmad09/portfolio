@@ -88,7 +88,7 @@ export function Services() {
                                         : 'text-accent-600 group-hover:text-accent-700'
                                 }`}
                             >
-                                <a href="#kontak" className="inline-flex items-center gap-2">
+                                <a href="#cta" className="inline-flex items-center gap-2">
                                     Konsultasi
                                     <span className="transition-transform duration-200 group-hover:translate-x-1">
                                         →

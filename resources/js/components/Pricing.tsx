@@ -133,7 +133,7 @@ export function Pricing() {
 
                             <div className="mt-auto">
                                 <button
-                                    onClick={() => scrollTo('kontak')}
+                                    onClick={() => scrollTo('cta')}
                                     className={`w-full rounded-full px-6 py-3 text-sm font-semibold leading-tight transition-all duration-200 active:scale-[0.98] ${
                                         t.highlighted
                                             ? 'bg-cream-50 text-accent-700 hover:bg-cream-100'

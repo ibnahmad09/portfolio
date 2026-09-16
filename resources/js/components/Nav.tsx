@@ -7,7 +7,6 @@ const NAV_ITEMS = [
     { id: 'proses', label: 'Proses' },
     { id: 'testimoni', label: 'Testimoni' },
     { id: 'harga', label: 'Harga' },
-    { id: 'kontak', label: 'Kontak' },
 ] as const;
 
 /** Quiet light/dark toggle matching the pill-button language used in the nav. */
@@ -148,7 +147,7 @@ export function Nav() {
                         </li>
                         <li className="ml-2">
                             <button
-                                onClick={() => scrollTo('kontak')}
+                                onClick={() => scrollTo('cta')}
                                 className="rounded-full bg-accent-600 px-5 py-1.5 text-[0.8125rem] font-semibold leading-tight text-cream-50 transition-all duration-200 hover:bg-accent-700 active:scale-[0.98]"
                             >
                                 Hubungi Kami
@@ -219,7 +218,7 @@ export function Nav() {
                                 </span>
                             </span>
                             <button
-                                onClick={() => scrollTo('kontak')}
+                                onClick={() => scrollTo('cta')}
                                 className="rounded-full bg-accent-600 px-5 py-2.5 text-sm font-semibold text-cream-50 transition-all hover:bg-accent-700 active:scale-[0.98]"
                             >
                                 Hubungi Kami

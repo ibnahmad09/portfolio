@@ -60,7 +60,7 @@ export function GradientCard({
 
     /** Smooth-scroll to the contact section (one-pager). */
     const scrollToKontak = () => {
-        const el = document.getElementById('kontak');
+        const el = document.getElementById('cta');
         if (el) {
             const y = el.getBoundingClientRect().top + window.scrollY - 80;
             window.scrollTo({ top: y, behavior: 'smooth' });

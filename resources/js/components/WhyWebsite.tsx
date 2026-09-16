@@ -177,7 +177,7 @@ export function WhyWebsite() {
                         tersembunyi—langkah pertama ke kehadiran online yang profesional.
                     </p>
                     <button
-                        onClick={() => scrollTo('kontak')}
+                        onClick={() => scrollTo('cta')}
                         className="mt-8 inline-block rounded-full bg-cream-50 px-7 py-3.5 text-sm font-semibold leading-tight text-accent-700 shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-all duration-200 hover:bg-cream-100 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] active:scale-[0.98]"
                     >
                         Mulai Sekarang
