@@ -16,7 +16,7 @@ export function CtaSection() {
     return (
         <section
             id="cta"
-            className="relative mx-auto w-full overflow-hidden px-6 py-24 text-center md:px-8 md:py-28"
+            className="relative isolate mx-auto w-full overflow-hidden px-6 py-24 text-center md:px-8 md:py-28"
         >
             {/* Masked grid BG — CSS pattern, no images */}
             <div
