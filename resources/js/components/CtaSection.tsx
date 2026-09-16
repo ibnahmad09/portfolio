@@ -27,10 +27,10 @@ export function CtaSection() {
             {/* Radial accent oval at the bottom edge */}
             <div
                 aria-hidden
-                className="animate-fade-up absolute top-[calc(100%-90px)] left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-[100%] bg-[radial-gradient(closest-side,#e8dcc9_82%,#faf7f2)] opacity-0 md:h-[500px] md:w-[1100px] lg:top-[calc(100%-150px)] lg:h-[750px] lg:w-[140%] dark:bg-[radial-gradient(closest-side,#352d26_82%,#261f1a)]"
+                className="animate-fade-up absolute top-[calc(100%-90px)] left-1/2 -z-10 h-[500px] w-[700px] -translate-x-1/2 rounded-[100%] bg-[radial-gradient(closest-side,#e8dcc9_82%,#faf7f2)] opacity-0 md:h-[500px] md:w-[1100px] lg:top-[calc(100%-150px)] lg:h-[750px] lg:w-[140%] dark:bg-[radial-gradient(closest-side,#352d26_82%,#261f1a)]"
             />
 
-            <div className="mx-auto max-w-3xl">
+            <div className="relative z-10 mx-auto max-w-3xl">
                 {/* Eyebrow pill */}
                 <span className="animate-fade-in border-accent-700/30 text-accent-700 dark:border-accent-600/40 dark:text-accent-600 mx-auto flex w-fit items-center justify-center rounded-full border px-5 py-2 text-sm tracking-tight uppercase opacity-0">
                     Konsultasi Gratis
@@ -67,7 +67,7 @@ export function CtaSection() {
             {/* Bottom fade into the Footer surface */}
             <div
                 aria-hidden
-                className="animate-fade-up from-cream-50 dark:from-warm-900 pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t to-transparent opacity-0"
+                className="animate-fade-up from-cream-50 dark:from-warm-900 pointer-events-none absolute inset-x-0 -z-10 bottom-0 h-20 bg-gradient-to-t to-transparent opacity-0"
             />
         </section>
     );
