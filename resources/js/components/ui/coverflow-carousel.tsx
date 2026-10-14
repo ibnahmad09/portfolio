@@ -15,6 +15,9 @@ export interface CoverflowSlide {
   title?: string;
   subtitle?: string;
   meta?: { label: string; value: string }[];
+  gallery?: { src: string; alt: string }[];
+  /** Public URL of the live project. Empty string means "no link yet". */
+  link?: string;
 }
 
 export interface CoverflowCarouselProps {
@@ -41,6 +44,8 @@ export interface CoverflowCarouselProps {
   label?: string;
   className?: string;
   cardClassName?: string;
+  /** Fires on a tap/click (not a drag) on a card, with its slide index. */
+  onCardClick?: (index: number) => void;
 }
 
 export function CoverflowCarousel({
@@ -59,6 +64,7 @@ export function CoverflowCarousel({
   label = "Cover carousel",
   className,
   cardClassName,
+  onCardClick,
 }: CoverflowCarouselProps) {
   const count = slides.length;
 
@@ -77,6 +83,10 @@ export function CoverflowCarousel({
     pos: number;
     v: number;
     t: number;
+    /** True once the gesture has moved far enough to count as a drag. */
+    moved: boolean;
+    /** Slide index under the pointer when the gesture began. */
+    index: number | null;
   } | null>(null);
 
   const [selected, setSelected] = React.useState(0);
@@ -173,24 +183,38 @@ export function CoverflowCarousel({
   );
 
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    // Only the primary button starts a drag/tap; ignore secondary buttons.
+    if (event.button !== 0) return;
     if (rafRef.current !== null) {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
     }
     event.currentTarget.setPointerCapture(event.pointerId);
     targetRef.current = posRef.current;
+    const slideTarget =
+      event.target instanceof Element
+        ? event.target.closest("[data-slide-index]")
+        : null;
+    const raw = slideTarget?.getAttribute("data-slide-index");
+    const clicked = raw === null || raw === undefined ? NaN : Number(raw);
     dragRef.current = {
       id: event.pointerId,
       x: event.clientX,
       pos: posRef.current,
       v: 0,
       t: performance.now(),
+      moved: false,
+      index: Number.isNaN(clicked) ? null : clicked,
     };
   };
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     const drag = dragRef.current;
     if (!drag || drag.id !== event.pointerId) return;
+
+    if (!drag.moved && Math.abs(event.clientX - drag.x) > 6) {
+      drag.moved = true;
+    }
 
     const pitch = widthRef.current * (1 + gap);
     if (!pitch) return;
@@ -207,9 +231,16 @@ export function CoverflowCarousel({
     paint();
   };
 
-  const endDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+  const endDrag = (
+    event: React.PointerEvent<HTMLDivElement>,
+    cancelled = false,
+  ) => {
     const drag = dragRef.current;
     if (!drag || drag.id !== event.pointerId) return;
+    // A tap (no meaningful movement) opens the card; a cancelled gesture never does.
+    if (!cancelled && !drag.moved && drag.index !== null && onCardClick) {
+      onCardClick(drag.index);
+    }
     dragRef.current = null;
     // Let a flick carry, but never more than two cards.
     const carried = Math.max(-2, Math.min(2, drag.v * 0.18));
@@ -259,7 +290,7 @@ export function CoverflowCarousel({
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={endDrag}
-          onPointerCancel={endDrag}
+          onPointerCancel={(event) => endDrag(event, true)}
           onKeyDown={(event) => {
             if (event.key === "ArrowLeft") {
               event.preventDefault();
@@ -267,6 +298,9 @@ export function CoverflowCarousel({
             } else if (event.key === "ArrowRight") {
               event.preventDefault();
               nudge(1);
+            } else if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              onCardClick?.(selected);
             }
           }}
           // Vertical padding keeps the drop shadows clear of the overflow clip.
@@ -290,6 +324,7 @@ export function CoverflowCarousel({
                 ref={(node) => {
                   cardRefs.current[index] = node;
                 }}
+                data-slide-index={index}
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${index + 1} of ${count}`}

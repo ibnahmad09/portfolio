@@ -56,21 +56,21 @@ export function ProcessSection() {
             >
                 <div className="mx-auto max-w-full px-6 md:px-10">
                     {/* ── Heading, stacked above the journey ── */}
-                    <div ref={headingRef} className="reveal max-w-3xl">
-                        <h2 className="font-serif text-[clamp(1.9rem,3vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-ink-900 dark:text-cream-50">
+                    <div ref={headingRef} className="reveal mx-auto max-w-3xl text-center">
+                        <h2 className="font-serif text-[clamp(2rem,3.4vw,3.25rem)] font-bold leading-[1.08] tracking-tight text-ink-900 dark:text-cream-50">
                             Begini cara kami bekerja
                         </h2>
-                        <p className="mt-5 max-w-xl text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300">
+                        <p className="mx-auto mt-5 max-w-xl text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300">
                             Proses yang jelas dan transparan, supaya Anda tahu persis apa
                             yang terjadi pada setiap langkah. Tidak ada kejutan di akhir.
                         </p>
-                        <div className="mt-8 hidden h-px w-24 bg-accent-600/70 md:block" />
+                        <div className="mx-auto mt-8 hidden h-px w-24 bg-accent-600/70 md:block" />
                     </div>
 
                     {/* ── Journey map ── */}
                     <div
                         ref={journeyRef}
-                        className="reveal relative mt-16 md:h-[1180px] md:mt-20"
+                        className="mx-auto max-w-5xl reveal relative mt-16 md:h-[1180px] md:mt-20"
                     >
                         {/* Warm grid backdrop + edge fades (md+ only) */}
                         <div className="pointer-events-none absolute inset-0 hidden md:block">
