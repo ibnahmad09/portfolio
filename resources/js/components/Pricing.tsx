@@ -1,36 +1,28 @@
 import { useReveal } from '@/hooks/use-reveal';
 
-// mock: harga & isi paket adalah contoh — owner harus menyesuaikan penawaran sebenarnya
-const TIERS = [
+// mock: skema harga menyesuaikan adalah placeholder tampilan —
+// owner harus menyesuaikan isi penawaran sebenarnya sebelum dipublikasikan.
+const PRICE_FACTORS = [
     {
-        name: 'Basic',
-        price: 'Rp2,5jt',
-        per: 'sekali investasi',
-        desc: 'Website profil yang bersih dan profesional untuk mulai membangun kehadiran online.',
-        features: ['1–5 halaman', 'Desain sesuai identitas', 'Responsif (handphone & komputer)', 'Form kontak & peta lokasi'],
-        highlighted: false,
+        num: '01',
+        title: 'Jenis website',
+        desc: 'Landing page, company profile, toko online, sampai sistem khusus seperti manajemen sekolah.',
     },
     {
-        name: 'Pro',
-        price: 'Rp6jt',
-        per: 'sekali investasi',
-        desc: 'Paket paling populer untuk UMKM yang ingin menjual produk secara online.',
-        features: ['Semua fitur Basic', 'Toko online + pembayaran', 'Katalog produk tanpa batas', 'Pelatihan mengelola website', 'Dukungan 3 bulan'],
-        highlighted: true,
+        num: '02',
+        title: 'Fitur yang diinginkan',
+        desc: 'Pembayaran, katalog produk, booking, dashboard admin — makin banyak fiturnya, makin besar pengerjaannya.',
     },
     {
-        name: 'Custom',
-        price: 'Sesuai kebutuhan',
-        per: 'dibahas di proposal',
-        desc: 'Solusi khusus yang disesuaikan dengan alur dan kebutuhan bisnis Anda.',
-        features: ['Analisis kebutuhan khusus', 'Sistem & fitur dibuat sesuai permintaan', 'Jadwal khusus', 'Dukungan penuh'],
-        highlighted: false,
+        num: '03',
+        title: 'Domain & hosting',
+        desc: 'Pilihan nama domain dan paket hosting yang pas, termasuk perpanjangan tahun berikutnya.',
     },
 ];
 
 export function Pricing() {
     const headingRef = useReveal(0.2);
-    const gridRef = useReveal(0.1);
+    const cardRef = useReveal(0.1);
 
     const scrollTo = (id: string) => {
         const el = document.getElementById(id);
@@ -46,105 +38,100 @@ export function Pricing() {
                 {/* Heading */}
                 <div ref={headingRef} className="reveal max-w-2xl">
                     <h2 className="font-serif text-[clamp(1.9rem,3vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-ink-900 dark:text-cream-50">
-                        Harga yang jelas, tanpa biaya tersembunyi
+                        Harga menyesuaikan, tanpa biaya tersembunyi
                     </h2>
                     <p className="mt-5 max-w-xl text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300">
-                        Setiap proyek berbeda, jadi kami diskusikan dulu sebelum
-                        menentukan angka. Berikut gambaran awal sebagai titik mulai.
+                        Setiap proyek berbeda. Kami hitung dulu tiga hal di bawah
+                        ini, lalu Anda terima penawaran tertulis sebelum pekerjaan
+                        dimulai.
                     </p>
                 </div>
 
-                {/* Tiers */}
+                {/* Harga menyesuaikan */}
                 <div
-                    ref={gridRef}
-                    className="reveal stagger-children mt-14 mx-auto grid w-full max-w-7xl grid-cols-1 gap-5 lg:grid-cols-3 lg:items-stretch"
+                    ref={cardRef}
+                    className="reveal stagger-children mx-auto mt-14 w-full max-w-7xl rounded-3xl bg-accent-600 p-8 text-cream-50 shadow-card dark:bg-accent-600 dark:shadow-card-dark md:p-12"
                 >
-                    {TIERS.map((t, i) => (
-                        <div
-                            key={i}
-                            className={`flex flex-col rounded-2xl p-8 transition-all duration-300 ${
-                                t.highlighted
-                                    ? 'bg-accent-600 text-cream-50 shadow-card lg:-my-4 lg:py-12 hover:shadow-card-hover dark:bg-accent-600 dark:shadow-card-dark'
-                                    : 'border border-cream-200 bg-cream-100 text-ink-900 hover:-translate-y-1 hover:shadow-card-hover dark:border-warm-700 dark:bg-warm-800 dark:text-cream-50 dark:hover:shadow-card-hover-dark'
-                            }`}
-                        >
-                            <div className="flex items-baseline justify-between">
-                                <h3 className="font-serif text-2xl font-bold leading-none tracking-tight">
-                                    {t.name}
+                    <span className="text-[0.7rem] font-semibold uppercase tracking-wide text-cream-50/70">
+                        Harga
+                    </span>
+                    <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <span className="font-serif text-[clamp(2.1rem,4vw,3rem)] font-bold leading-none text-cream-50">
+                            Sesuai kebutuhan
+                        </span>
+                        <span className="text-[0.9rem] text-cream-50/80">
+                            dibahas di proposal
+                        </span>
+                    </div>
+
+                    <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
+                        {PRICE_FACTORS.map((factor) => (
+                            <div
+                                key={factor.num}
+                                className="rounded-2xl border border-cream-50/15 bg-cream-50/10 p-6"
+                            >
+                                <span className="font-serif text-2xl font-bold leading-none text-cream-50/60">
+                                    {factor.num}
+                                </span>
+                                <h3 className="mt-4 font-serif text-lg font-bold leading-tight tracking-tight text-cream-50">
+                                    {factor.title}
                                 </h3>
-                                {t.highlighted && (
-                                    <span className="rounded-full bg-cream-50/15 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-wide text-cream-50">
-                                        Terpopuler
-                                    </span>
-                                )}
+                                <p className="mt-3 text-[0.9rem] leading-relaxed text-cream-50/80">
+                                    {factor.desc}
+                                </p>
                             </div>
-                            <div className="mt-6 flex items-baseline gap-2">
-                                <span
-                                    className={`font-serif text-[clamp(1.9rem,3vw,2.35rem)] font-bold leading-none ${
-                                        t.highlighted
-                                            ? 'text-cream-50'
-                                            : 'text-ink-900 dark:text-cream-50'
-                                    }`}
-                                >
-                                    {t.price}
-                                </span>
-                                <span
-                                    className={`text-[0.8rem] ${
-                                        t.highlighted
-                                            ? 'text-cream-50/80'
-                                            : 'text-ink-500 dark:text-ink-300'
-                                    }`}
-                                >
-                                    {t.per}
-                                </span>
-                            </div>
-                            <p
-                                className={`mt-3 text-[0.92rem] leading-relaxed ${
-                                    t.highlighted
-                                        ? 'text-cream-50/85'
-                                        : 'text-ink-500 dark:text-ink-300'
-                                }`}
-                            >
-                                {t.desc}
-                            </p>
+                        ))}
+                    </div>
 
-                            <ul
-                                className={`mt-7 mb-8 space-y-3 border-t pt-6 text-[0.9rem] ${
-                                    t.highlighted
-                                        ? 'border-cream-50/20 text-cream-50/90'
-                                        : 'border-cream-200 text-ink-700 dark:border-warm-700 dark:text-ink-300'
-                                }`}
-                            >
-                                {t.features.map((f, j) => (
-                                    <li key={j} className="flex items-start gap-3">
-                                        <span
-                                            className={`mt-0.5 ${
-                                                t.highlighted
-                                                    ? 'text-cream-50/70'
-                                                    : 'text-accent-600 dark:text-accent-600'
-                                            }`}
-                                        >
-                                            ✓
-                                        </span>
-                                        <span>{f}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                    <p className="mt-10 border-t border-cream-50/20 pt-6 text-[0.95rem] leading-relaxed text-cream-50/85">
+                        Penawaran tertulis, rinci, dan tetap — tidak ada biaya
+                        tersembunyi di tengah jalan.
+                    </p>
 
-                            <div className="mt-auto">
-                                <button
-                                    onClick={() => scrollTo('cta')}
-                                    className={`w-full rounded-full px-6 py-3 text-sm font-semibold leading-tight transition-all duration-200 active:scale-[0.98] ${
-                                        t.highlighted
-                                            ? 'bg-cream-50 text-accent-700 hover:bg-cream-100'
-                                            : 'bg-accent-600 text-cream-50 hover:bg-accent-700 dark:bg-accent-600 dark:text-cream-50 dark:hover:bg-accent-700'
-                                    }`}
-                                >
-                                    Hubungi Kami
-                                </button>
-                            </div>
-                        </div>
-                    ))}
+                    <div className="mt-6">
+                        <button
+                            onClick={() => scrollTo('cta')}
+                            className="rounded-full bg-cream-50 px-7 py-3 text-sm font-semibold leading-tight text-accent-700 transition-all duration-200 hover:bg-cream-100 active:scale-[0.98]"
+                        >
+                            Konsultasi Gratis
+                        </button>
+                    </div>
+                </div>
+
+                {/* Ketentuan revisi */}
+                <div className="mx-auto mt-8 w-full max-w-7xl rounded-2xl border border-cream-200 bg-cream-100 p-6 dark:border-warm-700 dark:bg-warm-800 md:p-8">
+                    <h3 className="font-serif text-lg font-bold leading-tight tracking-tight text-ink-900 dark:text-cream-50">
+                        Ketentuan revisi
+                    </h3>
+                    <ul className="mt-4 space-y-2.5 text-[0.9rem] leading-relaxed text-ink-500 dark:text-ink-300">
+                        <li className="flex gap-3">
+                            <span className="mt-0.5 text-accent-600 dark:text-accent-600">✓</span>
+                            <span>
+                                Selama website masih dalam proses pengerjaan
+                                (belum serah terima), revisi desain dan konten
+                                termasuk dalam penawaran.
+                            </span>
+                        </li>
+                        <li className="flex gap-3">
+                            <span className="mt-0.5 text-accent-600 dark:text-accent-600">✓</span>
+                            <span>
+                                Setelah serah terima, revisi maupun perubahan
+                                konten dihitung terpisah.
+                            </span>
+                        </li>
+                        <li className="flex gap-3">
+                            <span className="mt-0.5 text-accent-600 dark:text-accent-600">✓</span>
+                            <span>
+                                Permintaan penambahan fitur setelah kesepakatan
+                                dihitung sebagai pekerjaan baru, biayanya
+                                menyesuaikan.
+                            </span>
+                        </li>
+                    </ul>
+                    <p className="mt-5 border-t border-cream-200 pt-5 text-[0.9rem] leading-relaxed text-ink-500 dark:border-warm-700 dark:text-ink-300">
+                        Butuh sistem atau fitur khusus? Ceritakan kebutuhan Anda
+                        — kami buatkan penawarannya.
+                    </p>
                 </div>
             </div>
         </section>

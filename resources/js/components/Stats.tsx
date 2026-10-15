@@ -3,18 +3,18 @@ import { useReveal } from '@/hooks/use-reveal';
 // All values are placeholders — owner must replace with real metrics.
 const STATS = [
     {
-        value: '120+',
+        value: '20+',
         label: 'Proyek selesai',
         // mock: total proyek selesai
     },
     {
-        value: '6',
+        value: '3',
         label: 'Tahun pengalaman',
         // mock: lama usaha berjalan
     },
     {
-        value: '98%',
-        label: 'Klien puas',
+        value: '5.0',
+        label: 'Rating klien puas',
         // mock: persentase kepuasan klien
     },
     {
@@ -28,7 +28,7 @@ export function Stats() {
     const ref = useReveal(0.2);
 
     return (
-        <section className="bg-cream-50 dark:bg-warm-900">
+        <section className="bg-cream-50 dark:bg-warm-900 mb-20">
             <div className="mx-auto max-w-full px-6 md:px-10">
                 <div
                     ref={ref}
@@ -37,11 +37,10 @@ export function Stats() {
                     {STATS.map((stat, i) => (
                         <div
                             key={i}
-                            className={`text-center ${
-                                i > 0
-                                    ? 'md:border-l md:border-cream-200 md:pl-6 dark:md:border-warm-700'
-                                    : ''
-                            }`}
+                            className={`text-center ${i > 0
+                                ? 'md:border-l md:border-cream-200 md:pl-6 dark:md:border-warm-700'
+                                : ''
+                                }`}
                         >
                             <div className="font-serif text-[clamp(2rem,4vw,2.75rem)] font-bold leading-none tracking-tight text-ink-900 dark:text-cream-50">
                                 {stat.value}

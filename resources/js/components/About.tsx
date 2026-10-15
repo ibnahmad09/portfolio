@@ -1,8 +1,31 @@
 import { useReveal } from '@/hooks/use-reveal';
 import { GradientCard } from '@/components/GradientCard';
+import { AvatarGroup } from '@/components/ui/avatar-group';
+import { Button } from '@/components/ui/button';
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
+
+const WHATSAPP_URL =
+    'https://wa.me/6282226866782?text=Halo%20Website%20Developer%20Team%2C%20saya%20mau%20konsultasi%20pembuatan%20website.';
+
+// Nama & peran adalah data asli. Ganti foto di public/images/teams/ bila ada
+// anggota baru.
+const TEAM = [
+    {
+        id: 1,
+        name: 'Aditya Ahmad Mulyana',
+        designation: 'Fullstack Developer',
+        image: '/images/teams/avatar1.jpg',
+    },
+    {
+        id: 2,
+        name: 'Muhammad Gustinur Hanafi',
+        designation: 'Website Developer',
+        image: '/images/teams/avatar2.jpeg',
+    },
+];
 
 // Grounded benefit copy — this section sells the MANFAAT (benefit) of hiring
-// Arsitektura's service, in a casual, persuasive tone for local UMKM.
+// Website Developer Team's service, in a casual, persuasive tone for local UMKM.
 const BENEFITS = [
     {
         badge: 'Kepercayaan',
@@ -40,6 +63,7 @@ const BENEFITS = [
 
 export function About() {
     const headingRef = useReveal(0.2);
+    const teamRef = useReveal(0.2);
     const gridRef = useReveal(0.1);
 
     return (
@@ -48,23 +72,55 @@ export function About() {
             className="bg-cream-50 py-24 dark:bg-warm-900 md:py-32"
         >
             <div className="mx-auto max-w-full px-6 md:px-10">
-                {/* ── Bare headline + mission ── */}
-                <div ref={headingRef} className="reveal max-w-3xl">
-                    <h2 className="font-serif text-[clamp(2rem,3.4vw,3.25rem)] font-bold leading-[1.08] tracking-tight text-ink-900 dark:text-cream-50">
-                        Situs untuk UMKM yang
-                        <br className="hidden md:block" />
-                        tumbuh&nbsp;
-                        <span className="  text-accent-600 dark:text-accent-600">
-                            percaya diri
-                        </span>
-                    </h2>
-                    <p className="mt-6 max-w-xl text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300 font-normal">
-                        Arsitektura adalah studio web-design untuk UMKM lokal. Kami
-                        membangun kehadiran online yang sederhana dan jujur—supaya
-                        usaha kecil bisa bersaing dengan profesional dan pelanggan
-                        langsung percaya.
-                    </p>
-                    <div className="mt-8 hidden h-px w-24 bg-accent-600/70 md:block" />
+                {/* ── Headline + team cluster (team sits to the right on lg) ── */}
+                <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+                    {/* Left: headline + mission */}
+                    <div ref={headingRef} className="reveal flex flex-col item-center max-w-3xl">
+                        <h2 className="font-serif text-[clamp(2rem,3.4vw,3.25rem)] font-bold leading-[1.08] tracking-tight text-ink-900 dark:text-cream-50">
+                            Situs untuk UMKM yang
+                            <br className="hidden md:block" />
+                            tumbuh&nbsp;
+                            <span className="  text-accent-600 dark:text-accent-600">
+                                percaya diri
+                            </span>
+                        </h2>
+                        <p className="mt-6 max-w-xl text-[1.15rem] leading-relaxed text-ink-500 dark:text-ink-300 font-normal">
+                            Website Developer Team adalah studio web-design untuk UMKM lokal. Kami
+                            membangun kehadiran online yang sederhana dan jujur—supaya
+                            usaha kecil bisa bersaing dengan profesional dan pelanggan
+                            langsung percaya.
+                        </p>
+                        <div className="mt-8 hidden h-px w-24 bg-accent-600/70 md:block" />
+                    </div>
+
+                    {/* Right: team developer (centered) */}
+                    <div
+                        ref={teamRef}
+                        className="reveal flex flex-col items-center text-center"
+                    >
+                        <p className="text-sm font-medium tracking-wide text-ink-700 dark:text-cream-100">
+                            Tim Developer
+                        </p>
+                        <AvatarGroup
+                            items={TEAM}
+                            maxVisible={5}
+                            size="lg"
+                            className="mt-6 justify-center"
+                        />
+                        <p className="mt-5 max-w-xs text-sm leading-relaxed text-ink-500 dark:text-ink-300 font-extrabold ">
+                            Orang-orang di balik setiap website yang kami bangun.
+                        </p>
+                        <Button asChild className="mt-6 p-7">
+                            <a
+                                href={WHATSAPP_URL}
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                <WhatsAppIcon className="h-5 w-5" />
+                                Chat via WhatsApp
+                            </a>
+                        </Button>
+                    </div>
                 </div>
 
                 {/* ── Benefit cards: one horizontal row on large screens ── */}

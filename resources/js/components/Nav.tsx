@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '@/hooks/use-theme';
+import { Logo } from '@/components/Logo';
+import { Button } from './ui/button';
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
+
+const WHATSAPP_URL =
+    'https://wa.me/6282226866782?text=Halo%20Website%20Developer%20Team%2C%20saya%20mau%20konsultasi%20pembuatan%20website.';
+
 
 const NAV_ITEMS = [
     { id: 'layanan', label: 'Layanan' },
@@ -102,17 +109,15 @@ export function Nav() {
         >
             {/* ── Floating capsule wrapper ── */}
             <div
-                className={`transition-all duration-300 ${
-                    scrolled ? 'px-3 pt-3 sm:px-5' : 'px-0 pt-0'
-                }`}
+                className={`transition-all duration-300 ${scrolled ? 'px-3 pt-3 sm:px-5' : 'px-0 pt-0'
+                    }`}
             >
                 {/* Capsule pill: full-width transparent at top → detached floating pill */}
                 <div
-                    className={`mx-auto flex items-center justify-between transition-all duration-300 ${
-                        scrolled
-                            ? 'h-16 max-w-5xl rounded-full border border-cream-200 bg-cream-50/80 px-5 shadow-[0_8px_30px_rgba(36,31,27,0.10)] backdrop-blur-xl dark:border-warm-700 dark:bg-warm-900/80 dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)]'
-                            : 'h-20 max-w-full rounded-none border-transparent bg-transparent px-6 shadow-none md:px-10'
-                    }`}
+                    className={`mx-auto flex items-center justify-between transition-all duration-300 ${scrolled
+                        ? 'h-16 max-w-5xl rounded-full border border-cream-200 bg-cream-50/80 p-10 shadow-[0_8px_30px_rgba(36,31,27,0.10)] backdrop-blur-xl dark:border-warm-700 dark:bg-warm-900/80 dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)]'
+                        : 'h-20 max-w-full rounded-none border-transparent bg-transparent px-6 shadow-none md:px-10'
+                        }`}
                 >
                     {/* ── Logo ── */}
                     <a
@@ -121,9 +126,10 @@ export function Nav() {
                             e.preventDefault();
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
-                        className="font-serif text-xl font-bold tracking-tight text-ink-900 transition-colors hover:text-accent-600 dark:text-cream-50 dark:hover:text-accent-600"
+                        className="inline-flex items-center transition-opacity hover:opacity-80"
+                        aria-label="Website Developer Team"
                     >
-                        Arsitektura<span className="text-accent-600">.</span>
+                        <Logo className="h-11 sm:h-12" />
                     </a>
 
                     {/* ── Desktop ── */}
@@ -132,11 +138,10 @@ export function Nav() {
                             <li key={item.id}>
                                 <button
                                     onClick={() => scrollTo(item.id)}
-                                    className={`rounded-full px-4 py-1.5 text-[0.8125rem] font-medium leading-tight transition-all duration-200 ${
-                                        activeId === item.id
-                                            ? 'bg-accent-600/10 text-accent-700 dark:bg-accent-600/15 dark:text-accent-600'
-                                            : 'text-ink-500 hover:bg-cream-100 hover:text-ink-900 dark:text-ink-300 dark:hover:bg-warm-700/50 dark:hover:text-cream-50'
-                                    }`}
+                                    className={`rounded-full px-4 py-1.5 text-[0.8125rem] font-medium leading-tight transition-all duration-200 ${activeId === item.id
+                                        ? 'bg-accent-600/10 text-accent-700 dark:bg-accent-600/15 dark:text-accent-600'
+                                        : 'text-ink-500 hover:bg-cream-100 hover:text-ink-900 dark:text-ink-300 dark:hover:bg-warm-700/50 dark:hover:text-cream-50'
+                                        }`}
                                 >
                                     {item.label}
                                 </button>
@@ -146,12 +151,16 @@ export function Nav() {
                             <ThemeToggle />
                         </li>
                         <li className="ml-2">
-                            <button
-                                onClick={() => scrollTo('cta')}
-                                className="rounded-full bg-accent-600 px-5 py-1.5 text-[0.8125rem] font-semibold leading-tight text-cream-50 transition-all duration-200 hover:bg-accent-700 active:scale-[0.98]"
-                            >
-                                Hubungi Kami
-                            </button>
+                            <Button asChild className="p-7">
+                                <a
+                                    href={WHATSAPP_URL}
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    <WhatsAppIcon className="h-5 w-5" />
+                                    Chat via WhatsApp
+                                </a>
+                            </Button>
                         </li>
                     </ul>
 
@@ -189,22 +198,20 @@ export function Nav() {
             {/* ── Mobile dropdown (aligns under the pill) ── */}
             {mobileOpen && (
                 <div
-                    className={`transition-all duration-300 md:hidden ${
-                        scrolled
-                            ? 'mx-3 mt-2 rounded-2xl border border-cream-200 bg-cream-50/90 pb-6 pt-3 shadow-[0_8px_30px_rgba(36,31,27,0.10)] backdrop-blur-xl dark:border-warm-700 dark:bg-warm-900/90 dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)] sm:mx-5'
-                            : 'border-t border-cream-200 bg-cream-50 px-6 pb-6 pt-4 dark:border-warm-700 dark:bg-warm-900'
-                    }`}
+                    className={`transition-all duration-300 md:hidden ${scrolled
+                        ? 'mx-3 mt-2 rounded-2xl border border-cream-200 bg-cream-50/90 pb-6 pt-3 shadow-[0_8px_30px_rgba(36,31,27,0.10)] backdrop-blur-xl dark:border-warm-700 dark:bg-warm-900/90 dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)] sm:mx-5'
+                        : 'border-t border-cream-200 bg-cream-50 px-6 pb-6 pt-4 dark:border-warm-700 dark:bg-warm-900'
+                        }`}
                 >
                     <ul className="flex flex-col gap-1">
                         {NAV_ITEMS.map((item) => (
                             <li key={item.id}>
                                 <button
                                     onClick={() => scrollTo(item.id)}
-                                    className={`block w-full rounded-lg px-4 py-2.5 text-left text-sm font-medium transition-colors ${
-                                        activeId === item.id
-                                            ? 'bg-accent-600/10 text-accent-700 dark:bg-accent-600/15 dark:text-accent-600'
-                                            : 'text-ink-700 hover:bg-cream-100 dark:text-ink-300 dark:hover:bg-warm-700/50'
-                                    }`}
+                                    className={`block w-full rounded-lg px-4 py-2.5 text-left text-sm font-medium transition-colors ${activeId === item.id
+                                        ? 'bg-accent-600/10 text-accent-700 dark:bg-accent-600/15 dark:text-accent-600'
+                                        : 'text-ink-700 hover:bg-cream-100 dark:text-ink-300 dark:hover:bg-warm-700/50'
+                                        }`}
                                 >
                                     {item.label}
                                 </button>
@@ -217,12 +224,16 @@ export function Nav() {
                                     Ganti tema
                                 </span>
                             </span>
-                            <button
-                                onClick={() => scrollTo('cta')}
-                                className="rounded-full bg-accent-600 px-5 py-2.5 text-sm font-semibold text-cream-50 transition-all hover:bg-accent-700 active:scale-[0.98]"
-                            >
-                                Hubungi Kami
-                            </button>
+                            <Button asChild className="mr-3 p-7">
+                                <a
+                                    href={WHATSAPP_URL}
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    <WhatsAppIcon className="h-5 w-5" />
+                                    Chat via WhatsApp
+                                </a>
+                            </Button>
                         </li>
                     </ul>
                 </div>

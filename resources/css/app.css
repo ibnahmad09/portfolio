@@ -47,6 +47,11 @@
        keyframes live at the end of this file (byte-identical, see plan). */
     --animate-fade-in: fade-in 0.7s ease-out both;
     --animate-fade-up: fade-up 0.7s ease-out both;
+
+    /* Mobile service-pill marquee: top row drifts right, bottom row left.
+       Each track renders its set twice, so a 50% translate loops seamlessly. */
+    --animate-marquee-left: marquee-left 22s linear infinite;
+    --animate-marquee-right: marquee-right 22s linear infinite;
 }
 
 /* ── Reveal animations ──────────────────────────────────────────── */
@@ -154,5 +159,24 @@ html.theme-transition *::after {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Mobile service-pill marquee — see --animate-marquee-* in @theme above. */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
   }
 }

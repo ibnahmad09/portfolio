@@ -1,6 +1,11 @@
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
+import WhatsAppIcon from './ui/whatsapp-icon';
+
+const WHATSAPP_URL =
+    'https://wa.me/6282226866782?text=Halo%20Website%20Developer%20Team%2C%20saya%20mau%20konsultasi%20pembuatan%20website.';
+
 
 /**
  * CtaSection — adapted from the 21st.dev hero-1 component to the "Warm &
@@ -51,14 +56,14 @@ export function CtaSection() {
 
                 {/* CTA */}
                 <div className={cn('flex justify-center')}>
-                    <Button asChild size="lg">
+                    <Button asChild className="p-7">
                         <a
-                            href="https://wa.me/6281234567890?text=Halo%20Arsitektura%2C%20saya%20mau%20konsultasi%20pembuatan%20website."
+                            href={WHATSAPP_URL}
                             target="_blank"
                             rel="noopener"
                         >
-                            Mulai Konsultasi via WhatsApp
-                            <ChevronRight className="h-4 w-4" />
+                            <WhatsAppIcon className="h-5 w-5" />
+                            Mulai Konsultasi Via WhatsApp
                         </a>
                     </Button>
                 </div>

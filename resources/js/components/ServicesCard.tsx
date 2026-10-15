@@ -3,9 +3,14 @@ import { motion, useReducedMotion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
 /**
- * ServicesCard — displays 6 core services as individual pill-shaped cards
- * in a horizontal wrap layout. Each card shows an icon + service name.
- * Designed to sit below the Hero CTA button.
+ * ServicesCard — displays 6 core services as individual pill-shaped cards.
+ *
+ * Desktop (md+): pills wrap into centred rows.
+ * Mobile: pills split into two marquee rows that drift in opposite
+ * directions — the top row moves right, the bottom row moves left — for a
+ * livelier, fully-bleed band under the hero. The wrap layout is kept for
+ * larger screens where all pills fit comfortably.
+ *
  * Uses the "Warm & Bersahaja" palette.
  */
 
@@ -76,44 +81,116 @@ function staggerDelay(index: number): number {
     return 0.06 * index;
 }
 
-export function ServicesCard({ className }: { className?: string }) {
-    const prefersReducedMotion = useReducedMotion();
-
+/** Single service pill — shared by the desktop wrap and the mobile marquee. */
+function ServicePill({
+    service,
+    className,
+    ariaHidden,
+}: {
+    service: ServiceItem;
+    className?: string;
+    ariaHidden?: boolean;
+}) {
     return (
         <div
+            aria-hidden={ariaHidden}
             className={cn(
-                'flex flex-wrap items-center justify-center gap-3',
+                'flex items-center gap-2.5 rounded-full px-4 py-2',
+                'border border-cream-200/60 bg-cream-50/80',
+                'shadow-sm backdrop-blur-sm',
+                'transition-all duration-200',
+                'hover:border-accent-600/30 hover:shadow-md',
+                'dark:border-warm-700/60 dark:bg-warm-800/80',
+                'dark:hover:border-accent-600/30',
                 className,
             )}
         >
-            {SERVICES.map((service, i) => (
-                <motion.div
-                    key={service.name}
-                    initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
-                    animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
-                    transition={{
-                        duration: 0.4,
-                        delay: 0.3 + staggerDelay(i),
-                        ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className={cn(
-                        'flex items-center gap-2.5 rounded-full px-4 py-2',
-                        'border border-cream-200/60 bg-cream-50/80',
-                        'shadow-sm backdrop-blur-sm',
-                        'transition-all duration-200',
-                        'hover:border-accent-600/30 hover:shadow-md',
-                        'dark:border-warm-700/60 dark:bg-warm-800/80',
-                        'dark:hover:border-accent-600/30',
-                    )}
-                >
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-600/10 text-accent-600 dark:bg-accent-600/20">
-                        {service.icon}
-                    </span>
-                    <span className="text-sm font-medium text-ink-800 dark:text-cream-100">
-                        {service.name}
-                    </span>
-                </motion.div>
-            ))}
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-600/10 text-accent-600 dark:bg-accent-600/20">
+                {service.icon}
+            </span>
+            <span className="text-sm font-medium whitespace-nowrap text-ink-800 dark:text-cream-100">
+                {service.name}
+            </span>
+        </div>
+    );
+}
+
+/**
+ * One marquee lane. The set is rendered twice so a 50% translate loops
+ * seamlessly; `direction` picks which way the lane drifts.
+ */
+function MarqueeRow({
+    items,
+    direction,
+}: {
+    items: ServiceItem[];
+    direction: 'left' | 'right';
+}) {
+    const loop = [...items, ...items];
+
+    return (
+        <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+            <div
+                className={cn(
+                    'flex w-max',
+                    direction === 'left'
+                        ? 'animate-marquee-left'
+                        : 'animate-marquee-right',
+                    'motion-reduce:animate-none',
+                )}
+            >
+                {loop.map((service, i) => (
+                    <ServicePill
+                        key={`${direction}-${service.name}-${i}`}
+                        service={service}
+                        className="mr-3 shrink-0"
+                        ariaHidden={i >= items.length}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}
+
+export function ServicesCard({ className }: { className?: string }) {
+    const prefersReducedMotion = useReducedMotion();
+
+    const topRow = SERVICES.slice(0, 3);
+    const bottomRow = SERVICES.slice(3);
+
+    return (
+        <div className={cn('w-full', className)}>
+            {/* Desktop: centred wrap (unchanged) */}
+            <div className="hidden flex-wrap items-center justify-center gap-3 md:flex">
+                {SERVICES.map((service, i) => (
+                    <motion.div
+                        key={service.name}
+                        initial={
+                            prefersReducedMotion
+                                ? undefined
+                                : { opacity: 0, scale: 0.9 }
+                        }
+                        animate={
+                            prefersReducedMotion
+                                ? undefined
+                                : { opacity: 1, scale: 1 }
+                        }
+                        transition={{
+                            duration: 0.4,
+                            delay: 0.3 + staggerDelay(i),
+                            ease: [0.16, 1, 0.3, 1],
+                        }}
+                    >
+                        <ServicePill service={service} />
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Mobile: two opposite marquee lanes, edge to edge */}
+            <div className="-mx-4 flex flex-col gap-3 md:hidden">
+                <MarqueeRow items={topRow} direction="right" />
+                <MarqueeRow items={bottomRow} direction="left" />
+            </div>
         </div>
     );
 }

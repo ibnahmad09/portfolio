@@ -118,29 +118,6 @@ export function Hero() {
         }
     };
 
-    // Floating client cards (fictional UMKM — placeholder content).
-    // mock: ganti nama & deskripsi klien dengan contoh nyata
-    const clientCards = [
-        {
-            initial: 'R',
-            name: 'Kedai Roti Sangkuriang',
-            desc: 'Website profil, pesanan lancar',
-            color: 'bg-accent-600',
-        },
-        {
-            initial: 'K',
-            name: 'Kopi Nugraha',
-            desc: 'Toko online dibuka',
-            color: 'bg-accent-700',
-        },
-        {
-            initial: 'J',
-            name: 'Jahit Berkah',
-            desc: 'Booking online tersedia',
-            color: 'bg-accent-800',
-        },
-    ];
-
     return (
         <MotionConfig reducedMotion="user">
             <section
@@ -213,95 +190,6 @@ export function Hero() {
                         {/* Services Card */}
                         <ServicesCard className="mx-auto mt-10 max-w-4xl" />
                     </div>
-                </div>
-
-                {/* ── Decorative frame: floating cards + arrows (xl+ so there's gutter
-                       clear of the centered text) ── */}
-                <div className="pointer-events-none absolute inset-0 hidden xl:block">
-                    {/* Hand-drawn arrow → left cards */}
-                    <svg
-                        viewBox="0 0 200 120"
-                        fill="none"
-                        className="absolute left-[20%] top-[34%] w-36 -rotate-12 text-accent-600/60"
-                    >
-                        <path
-                            d="M10 95 C 70 30, 120 110, 175 20"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                        <path
-                            d="M150 14 l 30 -4 l -12 28"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-
-                    {/* Floating card 1 (top-left) */}
-                    <motion.div
-                        animate={{ y: [0, -14, 0] }}
-                        transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-                        className="absolute left-[5%] top-[16%] z-20 flex items-center gap-3 rounded-2xl border border-white/60 bg-white/70 p-4 shadow-card backdrop-blur-md dark:border-warm-700/60 dark:bg-warm-800/70 dark:shadow-card-dark"
-                    >
-                        <div
-                            className={`flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold text-cream-50 shadow-inner ${clientCards[0].color}`}
-                        >
-                            {clientCards[0].initial}
-                        </div>
-                        <div>
-                            <div className="text-sm font-semibold text-ink-900 dark:text-cream-50">
-                                {clientCards[0].name}
-                            </div>
-                            <div className="text-xs text-ink-500 dark:text-ink-300">
-                                {clientCards[0].desc}
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Floating card 2 (bottom-left) */}
-                    <motion.div
-                        animate={{ y: [0, -10, 0] }}
-                        transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-                        className="absolute bottom-[24%] left-[8%] z-10 flex items-center gap-3 rounded-2xl border border-white/60 bg-white/70 p-4 shadow-card backdrop-blur-md dark:border-warm-700/60 dark:bg-warm-800/70 dark:shadow-card-dark"
-                    >
-                        <div
-                            className={`flex h-11 w-11 items-center justify-center rounded-full text-base font-bold text-cream-50 shadow-inner ${clientCards[1].color}`}
-                        >
-                            {clientCards[1].initial}
-                        </div>
-                        <div>
-                            <div className="text-sm font-semibold text-ink-900 dark:text-cream-50">
-                                {clientCards[1].name}
-                            </div>
-                            <div className="text-xs text-ink-500 dark:text-ink-300">
-                                {clientCards[1].desc}
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Floating card 3 (top-right) */}
-                    <motion.div
-                        animate={{ y: [0, -12, 0] }}
-                        transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
-                        className="absolute right-[5%] top-[18%] z-10 flex items-center gap-3 rounded-2xl border border-white/60 bg-white/70 p-4 shadow-card backdrop-blur-md dark:border-warm-700/60 dark:bg-warm-800/70 dark:shadow-card-dark"
-                    >
-                        <div
-                            className={`flex h-11 w-11 items-center justify-center rounded-full text-base font-bold text-cream-50 shadow-inner ${clientCards[2].color}`}
-                        >
-                            {clientCards[2].initial}
-                        </div>
-                        <div>
-                            <div className="text-sm font-semibold text-ink-900 dark:text-cream-50">
-                                {clientCards[2].name}
-                            </div>
-                            <div className="text-xs text-ink-500 dark:text-ink-300">
-                                {clientCards[2].desc}
-                            </div>
-                        </div>
-                    </motion.div>
                 </div>
 
                 {/* ── Rotating circular badge (click → #cta), framed lower-right ── */}

@@ -19,7 +19,7 @@ import { Footer } from '@/components/Footer';
 export default function Welcome() {
     return (
         <>
-            <Head title="Beranda" />
+            <Head title="Website Developer Team - WDT" />
 
             <div className="bg-cream-50 text-ink-900 dark:bg-warm-900 dark:text-cream-50 relative min-h-[100dvh] font-sans antialiased">
                 {/* Grain overlay */}
