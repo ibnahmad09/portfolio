@@ -26,5 +26,9 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+.DS_Store
+.omo/
+.playwright-mcp/
+/graphify-out/
 
 .superpowers/
